@@ -1,0 +1,54 @@
+/* Chaque carte (ou skeleton) aura un comportement adaptatif :
+   - "flex: 1 1 220px" => la carte occupe au moins 220px,
+       puis grandit au besoin, jusqu'à concurrence de "max-width: 220px".
+   - Ainsi, si la fenêtre est assez large pour 3 cartes de 220px chacune,
+       elles apparaîtront sur une rangée. Si l'espace se réduit (ex. tablette),
+       le flex-wrap fera passer des cartes à la ligne suivante.
+*/
+.product-card,
+.product-skeleton {
+    flex: 1 1 220px;
+    max-width: 220px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    /* On met 0 de margin puisque le "gap" de flex gère l'espacement */
+    margin: 0;
+    padding: 15px;
+}
+
+/* Image du produit (ou skeleton d'image) */
+.product-card img,
+.product-skeleton img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product-card p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Bouton "Détails" */
+.details-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    color: white;
+    background-color: #008cba;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.details-btn:hover {
+    background-color: #005f6a;
+}

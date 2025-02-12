@@ -1,0 +1,39 @@
+.product-list {
+    display: flex;
+    /* Autorise le retour à la ligne si l'espace horizontal est insuffisant */
+    flex-wrap: wrap;
+    /* Espace entre les cartes */
+    gap: 20px;
+    /* Centre l'ensemble horizontalement */
+    justify-content: center;
+
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9; /* Optionnel : léger fond gris */
+}
+
+/*
+   Si vous utilisez un skeleton, vous pouvez appliquer un style similaire
+   pour qu'il ait la même "enveloppe" que .product-card.
+*/
+.product-skeleton {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 220px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    /* Idem, pas de margin pour laisser le grid-gap gérer l'espacement */
+    margin: 0;
+}
+
+/*
+   Optionnel : si vous importez react-loading-skeleton
+   et souhaitez ajuster encore la couleur / l'espacement entre Skeletons, etc.
+   .product-skeleton .react-loading-skeleton {
+       margin-bottom: 10px;
+       border-radius: 5px;
+   }
+*/
