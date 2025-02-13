@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import axios from "axios";
 import "../styles/Login.css"
 import {AuthContext} from "../context/AuthContext";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Login(props) {
     const { login } = useContext(AuthContext)
@@ -37,41 +37,52 @@ function Login(props) {
     return (
         <div className={"login-page"}>
             <div className="left-page">
-                {/*<img />*/}
+                <img src='' alt={"LOGO"} />
+            </div>
+            <div className={"error"}>
+                {errorMsg && (
+                    <div className={"error-message"}>{errorMsg}</div>
+                )}
             </div>
             <div className="right-page">
                 <div className="container">
                     <h2>SE CONNECTER</h2>
-                    <form>
-                        <div className="box-input">
-                            <label>Votre adresse email</label>
+                    <form className={"box-input"}>
+                        <div className={"email-input"}>
                             <input
                                 type={"email"}
                                 className="input-top"
                                 placeholder={"Saisir ici..."}
                                 value={email}
-                                onChange={(e) => { setEmail(e.target.value);}}
+                                onChange={(e) => {
+                                    setEmail(e.target.value)
+                                }}
                                 required
                             />
-                            {/*<button></button>*/}
-                            <label>Votre mot de passe</label>
+                            <label>Votre adresse email</label>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"}/></button>
+                        </div>
+                        <div className={"password-input"}>
                             <input
                                 type={"password"}
                                 className="input-left"
                                 placeholder={"Saisir ici..."}
                                 value={password}
-                                onChange={(e) => { setPassword(e.target.value);}}
+                                onChange={(e) => {
+                                    setPassword(e.target.value)
+                                }}
                                 required
                             />
-                            {/*<button></button>*/}
+                                <label>Votre mot de passe</label>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"}/></button>
                         </div>
-                        {errorMsg && (
-                            <div className={"error-message"}>{errorMsg}</div>
-                        )}
                         <div className={"box-btn"}>
                             <button type={"submit"} onClick={handleSubmit}>Connexion</button>
-                            <p>Mot de passe oublié ?</p>
                         </div>
+                        <Link to={"/reset-password"}>Mot de passe oublié ?</Link>
+                        <div className={"divider"}></div>
+                        <Link to={"/register"}>Créer un compte</Link>
+                        <Link to={"/"}>Retour</Link>
                     </form>
                 </div>
             </div>

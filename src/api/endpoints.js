@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("./db");
 const bcrypt = require("bcrypt");
-const {verifyToken, getDataUser} = require("./middleware");
+const {verifyToken} = require("./middleware");
 const router = express.Router();
 const {sign} = require("jsonwebtoken");
 require("dotenv").config();
@@ -43,7 +43,7 @@ router.post("/users/login", (req, res) => {
             const token = sign(
         {id: user.user_id, email: user.user_email},
                 process.env.JWT_SECRET,
-        {expiresIn: process.env.JTW_EXPIRES_IN}
+        {expiresIn: process.env.JTW_EXPIRES_IN, }
             )
 
             res.status(200).json({
@@ -53,8 +53,6 @@ router.post("/users/login", (req, res) => {
                     id: user.user_id,
                     nom: user.user_name,
                     prenom: user.user_prenom,
-                    email: user.user_email,
-                    telephone: user.user_telephone,
                 }
             })
         })
@@ -130,12 +128,12 @@ router.post("/panier/create", (req, res) => {
 /**
  * ➤ ROUTE : Récupérer tous les articles
  */
-router.get("/article",  (req, res, next) => {
-    console.log(req, res, next);
+router.get("/article",  (req, res) => {
     db.query("SELECT * FROM article", (err, result) => {
         if (err) return res.status(500).json({ message: "Erreur serveur" });
         res.json(result);
     });
+
 });
 
 /**
@@ -149,12 +147,10 @@ router.get("/article/:id", verifyToken, (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Erreur serveur" });
         }
-
         if (result.length === 0) {
-            return res.status(404).json({ message: "Produit non trouvé" });
+            return res.status(404).json({ message: "Article non trouvé" });
         }
-
-        res.json(result[0]); // Retourner le premier (et unique) résultat
+        res.json(result[0]);
     });
 });
 
