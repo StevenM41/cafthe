@@ -1,20 +1,33 @@
 const jwt = require("jsonwebtoken");
 
-// Middleware pour la protection des routes
 const verifyToken = (req, res, next) => {
-    const token = req.headers["authorization"];
+    const authHeader = req.headers["authorization"];
 
-    console.log(token);
-
-    if (!token) {
-        return res.status(403).json({ message: "Token manquant" });
+    if (!authHeader) {
+        return res.status(401).json({ message: "Token manquant" });
     }
 
-    jwt.verify(token.split(" ")[1], process.env.JWT_SECRET, (err, decoded) => {
+    const tokenParts = authHeader.split(" ");
+    if (tokenParts.length !== 2 || tokenParts[0] !== "Bearer") {
+        return res.status(401).json({ message: "Format de token invalide" });
+    }
+
+    const tokenValue = tokenParts[1];
+    const decoded = jwt.decode(tokenValue);
+
+    if (decoded) {
+        console.log("Token décodé :", decoded);
+        console.log("Expire à :", new Date(decoded.exp * 1000).toLocaleString());
+    } else {
+        console.log("Token invalide");
+    }
+    jwt.verify(tokenValue, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
+            console.error("Erreur de vérification du token :", err.message);
             return res.status(401).json({ message: "Token invalide" });
         }
-        req.client = decoded;
+        console.log("Token valide, utilisateur :", decoded);
+        req.user = decoded;
         next();
     });
 };

@@ -10,15 +10,25 @@ export function AuthProvider({ children }) {
         const storedToken = localStorage.getItem("token");
         const storedUser = localStorage.getItem("user");
 
-        if(storedUser &&  storedToken) {
-            setToken(storedToken)
-            setUser(JSON.parse(storedUser))
+        console.log("Token récupéré depuis localStorage :", storedToken);
+        console.log("Utilisateur récupéré :", storedUser);
+
+        if (storedUser && storedToken) {
+            setToken(storedToken);
+            setUser(JSON.parse(storedUser));
         }
     }, []);
 
     useEffect(() => {
+        if (token) {
+            const decoded = JSON.parse(atob(token.split(".")[1])); // Décodage base64
+            console.log("Token expire à :", new Date(decoded.exp * 1000).toLocaleString());
+        }
+    }, [token]);
+
+    useEffect(() => {
         if(token && user) {
-            localStorage.setItem("token", token)
+            localStorage.setItem("token", token.toString())
             localStorage.setItem("user", JSON.stringify(user))
         } else {
             localStorage.removeItem("token")
@@ -26,7 +36,11 @@ export function AuthProvider({ children }) {
         }
     }, [token, user]);
 
-    const login = (jtw, userData) => { setToken(jtw); setUser(userData); }
+    const login = (jwt, userData) => {
+        console.log("Token reçu au login :", jwt);
+        setToken(jwt);
+        setUser(userData);
+    };
     const logout = () => { setToken(null); setUser(null); }
     const value = { token, user, login, logout, isAuthenticated: !!token }
 
