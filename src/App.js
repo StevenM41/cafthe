@@ -6,6 +6,8 @@ import {AuthProvider} from "./context/AuthContext";
 import Login from "./pages/Login";
 import ProductDetails from "./pages/ProductDetails";
 
+import "../src/styles/reset.css"
+
 function App() {
     return (
       <AuthProvider>

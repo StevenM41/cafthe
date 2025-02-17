@@ -60,7 +60,7 @@ function Login(props) {
                                 required
                             />
                             <label>Votre adresse email</label>
-                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"}/></button>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={(e) => { setEmail('')}}/></button>
                         </div>
                         <div className={"password-input"}>
                             <input

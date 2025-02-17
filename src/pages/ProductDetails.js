@@ -7,10 +7,15 @@ function ProductDetails() {
     const [article, setArticle] = useState(null);
     const { token } = useContext(AuthContext); // Récupérer le token du contexte
 
+    console.log(token)
+
     useEffect(() => {
         const fetchProduit = async () => {
             try {
                 if (token) {
+                    console.log("En-têtes envoyés :", {
+                        'Authorization': `Bearer ${token}`,
+                    });
                     fetch(`http://localhost:3001/api/article/${id}`, {
                         method: 'GET',
                         headers: {
