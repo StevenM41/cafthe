@@ -103,7 +103,7 @@ h2, p, span, a, svg {
     border-radius: 50px;
 }
 
-.navlist label span input: {
+.navlist label span input {
     outline: none;
     width: 740px;
     height: 40px;
