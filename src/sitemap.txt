@@ -1,0 +1,53 @@
+Acceuil
+│
+├── Café
+│   ├── Grains de Café
+│   ├── Café Moulu
+│   ├── Capsules de Café
+│   ├── Café Bio
+│   └── Café Équitable
+│
+├── Thé
+│   ├── Thé Noir
+│   ├── Thé Vert
+│   ├── Thé Blanc
+│   ├── Infusions
+│   └── Thé Bio
+│
+├── Accessoires
+│   ├── Pour le Café
+│   │   ├── Machines à café
+│   │   ├── Moulins à café
+│   │   └── Filtres et accessoires
+│   │
+│   ├── Pour le Thé
+│   │   ├── Théières
+│   │   ├── Boules à thé
+│   │   └── Tasses et mugs
+│   │
+│   └── Autres Accessoires
+│       ├── Livres de recettes
+│       └── Sets de dégustation
+│
+├── À Propos
+│   ├── Histoire de l'entreprise
+│   └── Mission et valeurs
+│
+├── Blog
+│   ├── Articles sur le café et le thé
+│   ├── Recettes
+│   └── Conseils d'entretien des machines
+│
+├── Contact
+│   ├── Formulaire de contact
+│   └── Adresse et coordonnées
+│
+├── Service Client
+│   ├── FAQ
+│   ├── Politique de retour
+│   └── Conditions de livraison
+│
+└── Compte
+├── Connexion
+├── Inscription
+└── Suivi de commande

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import axios from "axios";
-import "../styles/Login.css"
-import {AuthContext} from "../context/AuthContext";
+import "../../styles/Login.css"
+import {AuthContext} from "../../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
 
 function Login(props) {
@@ -37,7 +37,7 @@ function Login(props) {
     return (
         <div className={"login-page"}>
             <div className="left-page">
-                <img src='' alt={"LOGO"} />
+                <img src='/cafthe.png' alt={"LOGO"} />
             </div>
             <div className={"error"}>
                 {errorMsg && (
