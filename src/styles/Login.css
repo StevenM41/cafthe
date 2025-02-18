@@ -89,10 +89,6 @@ body {
     color: black;
 }
 
-.email-input input::selection {
-    border: none;
-}
-
 .email-input button {
     position: absolute;
     right: 0;
@@ -110,7 +106,7 @@ body {
 }
 
 .password-input {
-    position: relative; /* Référentiel pour le label et le bouton */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,3 +152,17 @@ body {
 .box-btn {
     margin: 25px;
 }
+
+.box-btn button {
+    background: white;
+    width: 60%;
+    height: 100%;
+    margin: 16px 0;
+    border-radius: 15px;
+    font-size: 26px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 5px gray ;
+}
+
+

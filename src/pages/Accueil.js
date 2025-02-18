@@ -1,6 +1,9 @@
 import React from 'react';
 
-function Home(props) {
+//Présentation des produits phares
+//Promotions en cours
+
+function Accueil() {
     return (
         <div>
             <h1>Bienvenue chez Cafthé</h1>
@@ -8,4 +11,5 @@ function Home(props) {
     );
 }
 
-export default Home;
+
+export default Accueil;

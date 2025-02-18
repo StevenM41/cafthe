@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
 import axios from "axios";
-import "../styles/Login.css"
-import {AuthContext} from "../context/AuthContext";
+import "../../styles/Login.css"
+import {AuthContext} from "../../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
 
-function Login(props) {
+function Login() {
     const { login } = useContext(AuthContext)
     const navigate = useNavigate();
 
@@ -19,6 +19,9 @@ function Login(props) {
         try {
             const responce = await axios.post("http://localhost:3001/api/users/login", {user_email: email, user_password: password});
             const {token, client} = responce.data;
+
+            console.log(token, client);
+
             login(token, client);
             navigate("/")
         } catch (error) {
@@ -34,7 +37,7 @@ function Login(props) {
     return (
         <div className={"login-page"}>
             <div className="left-page">
-                <img src={"/cafthé.png"} alt={"LOGO"} />
+                <img src='/cafthe.png' alt={"LOGO"} />
             </div>
             <div className={"error"}>
                 {errorMsg && (
@@ -57,7 +60,7 @@ function Login(props) {
                                 required
                             />
                             <label>Votre adresse email</label>
-                            <button type={"reset"} onClick={()=>{setEmail("")}}><img src='/button.png' alt={"Bouton reset"}/></button>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={() => { setEmail('')}}/></button>
                         </div>
                         <div className={"password-input"}>
                             <input
@@ -71,7 +74,7 @@ function Login(props) {
                                 required
                             />
                                 <label>Votre mot de passe</label>
-                            <button type={"reset"} onClick={()=>{setPassword("")}} ><img src='/button.png' alt={"Bouton reset"}/></button>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"}/></button>
                         </div>
                         <div className={"box-btn"}>
                             <button type={"submit"} onClick={handleSubmit}>Connexion</button>

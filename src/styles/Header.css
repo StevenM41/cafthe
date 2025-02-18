@@ -1,139 +1,102 @@
-/* Styles généraux */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+h2, p, span, a, svg {
+    font-family: 'Poppins', sans-serif;
+    color: #1B0D03;
+    text-decoration: none;
 }
 
-.nav-links {
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 30px 7%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #C7D1A5;
-    padding: 10px 20px;
+    transition: all .50s ease;
+    background: #C7D1A5;
 }
 
 .logo img {
-    height: 40px;
+    width: 120px;
+    height: auto;
 }
 
-nav {
+.navlist {
+    display: flex;
+}
+
+.navlist a {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-grow: 1;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    position: relative;
+    justify-content: center;
     margin: 0 15px;
-}
-
-nav ul li a,
-nav ul li label {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #1B0D03;
-    font-size: 16px;
-}
-
-nav ul li a svg,
-nav ul li label svg {
-    width: 24px; /* Ajustez cette valeur pour changer la taille des icônes */
-    height: 24px;
-}
-
-nav ul li a p,
-nav ul li label p {
-    margin-left: 8px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-nav ul li a:hover p,
-nav ul li label:hover p {
-    opacity: 1;
-}
-
-/* Style pour le menu login */
-.login {
-    position: relative;
+    height: 60px;
+    width: 180px;
+    background: #7B9C64;
+    border-radius: 50px;
     cursor: pointer;
-}
-
-.login .menu-links {
-    display: none;
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background-color: #FCEDB1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    padding: 10px 0;
-    min-width: 150px;
-    z-index: 10;
-}
-
-.login:hover .menu-links {
-    display: block;
-}
-
-.menu-links a {
-    display: block;
-    padding: 10px 20px;
-    color: #1B0D03;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    transition: all .3s ease-out;
+    overflow: hidden;
     text-decoration: none;
 }
 
-.menu-links a:hover {
-    background-color: #FDF7E4;
+.navlist a i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    border-radius: 50px;
+    box-sizing: border-box;
 }
 
-/* Style pour la barre de recherche */
-.search-bar {
-    position: relative;
+.navlist a i svg {
+    font-size: 35px;
+}
+
+.navlist a span {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 60px;
+    margin-left: 10px;
+    display: none; /* Hide the text initially */
+    transition: all .3s ease-out;
+}
+
+.navlist a:hover span {
+    display: inline-block; /* Show the text on hover */
+}
+
+.right-content {
     display: flex;
     align-items: center;
 }
 
-.search-bar input {
-    width: 0;
-    opacity: 0;
-    height: 40px;
-    border: none;
-    padding: 0 10px;
-    transition: width 0.3s ease, opacity 0.3s ease;
+.nav-btn {
+    display: inline-block;
+    padding: 9px 24px;
+    background: transparent;
+    border: 2px solid #1B0D03;
+    border-radius: 7px;
+    color: #1B0D03;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all .6s ease;
 }
 
-.search-bar:hover input,
-.search-bar:focus-within input {
-    width: 450px;
-    opacity: 1;
-    padding-left: 40px;
+.nav-btn:hover {
+    transform: translateY(-5px);
+    border: 2px solid ;
 }
 
-.search-bar svg {
-    position: absolute;
-    left: 10px;
-    pointer-events: none;
-    font-size: 55px;
-
-}
-
-/* Style pour le promo */
-.promo {
-    background-color: #7B9C64;
-    color: #FDF7E4;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 14px;
+#menu-icon {
+    font-size: 42px;
+    z-index: 10001;
+    cursor: pointer;
+    margin-left: 25px;
+    display: none;
 }

@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("./db");
 const bcrypt = require("bcrypt");
-const {verifyToken} = require("./middleware");
+//const {verifyToken} = require("./middleware");
 const router = express.Router();
 const {sign} = require("jsonwebtoken");
 require("dotenv").config();
@@ -136,13 +136,21 @@ router.get("/article",  (req, res) => {
 
 });
 
+router.get("/article/promotions/", (req, res) => {
+    db.query("SELECT article.*, promotions.* FROM article JOIN article_promotions ON article.article_id = article_promotions.article_id JOIN promotions ON promotions.promotion_id = article_promotions.promotion_id;", (err, result) => {
+        if(err) return res.status(500).json({ message: "Erreur du chargement des articles en promotions."})
+        return res.status(200).json(result);
+    })
+})
+
 /**
  * ➤ ROUTE : Récupérer un produit par son ID
  * ➤ URL : GET /api/article/:id
  * ➤ Exemple d'utilisation : GET /api/article/1
  */
-router.get("/article/:id", verifyToken, (req, res) => {
-    const { id } = req.params;
+router.get("/article/:id", (req, res) => {
+    const { id } = req.params.id;
+
     db.query("SELECT * FROM article WHERE article_id = ?", [id], (err, result) => {
         if (err) {
             return res.status(500).json({ message: "Erreur serveur" });
@@ -153,5 +161,6 @@ router.get("/article/:id", verifyToken, (req, res) => {
         res.json(result[0]);
     });
 });
+
 
 module.exports = router;
