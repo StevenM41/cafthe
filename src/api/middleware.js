@@ -13,20 +13,12 @@ const verifyToken = (req, res, next) => {
     }
 
     const tokenValue = tokenParts[1];
-    const decoded = jwt.decode(tokenValue);
 
-    if (decoded) {
-        console.log("Token décodé :", decoded);
-        console.log("Expire à :", new Date(decoded.exp * 1000).toLocaleString());
-    } else {
-        console.log("Token invalide");
-    }
     jwt.verify(tokenValue, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             console.error("Erreur de vérification du token :", err.message);
             return res.status(401).json({ message: "Token invalide" });
         }
-        console.log("Token valide, utilisateur :", decoded);
         req.user = decoded;
         next();
     });

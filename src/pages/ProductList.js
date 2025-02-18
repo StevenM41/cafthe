@@ -53,7 +53,7 @@ function ProductList(props) {
       <h3>Liste des produits</h3>
       <div className="product-list">
         {article.map((article) => (
-          <ProductCard key={article.article_id} article={article} />
+            <ProductCard key={article.article_id} article={article} />
         ))}
       </div>
     </div>

@@ -1,54 +1,66 @@
 import React, {useContext, useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
 
-function ProductDetails() {
+function ArticleDetails() {
     const { id } = useParams();
     const [article, setArticle] = useState(null);
-    const { token } = useContext(AuthContext); // Récupérer le token du contexte
-
-    console.log(token)
+    const { token, isAuthenticated } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchProduit = async () => {
+        const fetchArticle = async () => {
             try {
                 if (token) {
-                    console.log("En-têtes envoyés :", {
-                        'Authorization': `Bearer ${token}`,
-                    });
                     fetch(`http://localhost:3001/api/article/${id}`, {
                         method: 'GET',
                         headers: {
-                            'Authorization': `Bearer ${token}`, // Inclure le token dans l'en-tête
+                            'Authorization': `Bearer ${token}`
                         },
                     })
                         .then(response => response.json())
                         .then(data => setArticle(data));
                 }
             } catch (error) {
-                console.error("Erreur au chargement du produit", error);
+                console.error("Erreur au chargement de l'article", error);
             }
         };
 
-        void fetchProduit();
-    }, [id, token]); // Dépend de l'ID du produit
-
-    if (!article) {
-        return <p>Produit introuvable ou erreur.</p>;
-    }
+        void fetchArticle();
+    }, [id, token]);
 
     return (
-        <div className="product-details">
-            <h2>{article.article_name}</h2>
-            <p>{article.article_desc}</p>
-            <p>
-                <strong>Prix TTC :</strong> {article.article_prix} euros
-            </p>
-            <p>
-                <strong>Stock :</strong> {article.article_stock} unités
-            </p>
-        </div>
+        <>
+            {
+                isAuthenticated ? (
+                    article ? (
+                    <>
+                        <div className="product-details">
+                            <h2>{article.article_name}</h2>
+                            <p>{article.article_desc}</p>
+                            <p>
+                                <strong>Prix TTC :</strong> {article.article_prix} euros
+                            </p>
+                            <p>
+                                <strong>Stock :</strong> {article.article_stock} unités
+                            </p>
+                        </div>
+                    </>
+                ) : (<>
+                        <div>
+                            <p>Article introuvable.</p>
+                        </div>
+                    </>
+                    )
+            ) : (
+                <div>
+                    <div>Go to login</div>
+                    <Link to={"/login"}>Connectez-vous</Link>
+                </div>
+                )
+            }
+        </>
     );
+
 }
 
-export default ProductDetails;
+export default ArticleDetails;
