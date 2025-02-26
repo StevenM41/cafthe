@@ -4,13 +4,14 @@ import "../../styles/Login.css"
 import {AuthContext} from "../../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
 
-function Login() {
+function Login(props) {
     const { login } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorMsg, setErrorMsg] = useState("")
+    const [capVal, setCapVal] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,7 +61,7 @@ function Login() {
                                 required
                             />
                             <label>Votre adresse email</label>
-                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={() => { setEmail('')}}/></button>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={(e) => { setEmail('')}}/></button>
                         </div>
                         <div className={"password-input"}>
                             <input
@@ -73,11 +74,11 @@ function Login() {
                                 }}
                                 required
                             />
-                                <label>Votre mot de passe</label>
+                            <label>Votre mot de passe</label>
                             <button type={"reset"}><img src='/button.png' alt={"Bouton reset"}/></button>
                         </div>
                         <div className={"box-btn"}>
-                            <button type={"submit"} onClick={handleSubmit}>Connexion</button>
+                            <button type={"submit"} disabled={!capVal} onClick={handleSubmit}>Connexion</button>
                         </div>
                         <Link to={"/reset-password"}>Mot de passe oublié ?</Link>
                         <div className={"divider"}></div>

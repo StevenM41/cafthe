@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("./db");
 const bcrypt = require("bcrypt");
-//const {verifyToken} = require("./middleware");
+const {verifyToken} = require("./middleware");
 const router = express.Router();
 const {sign} = require("jsonwebtoken");
 require("dotenv").config();
@@ -41,9 +41,9 @@ router.post("/users/login", (req, res) => {
             if(!isMatch) return res.status(401).json({message: "Mot de passe Incorrect"});
 
             const token = sign(
-        {id: user.user_id, email: user.user_email},
+                {id: user.user_id, email: user.user_email},
                 process.env.JWT_SECRET,
-        {expiresIn: process.env.JTW_EXPIRES_IN, }
+                {expiresIn: process.env.JTW_EXPIRES_IN, }
             )
 
             res.status(200).json({
@@ -133,9 +133,11 @@ router.get("/article",  (req, res) => {
         if (err) return res.status(500).json({ message: "Erreur serveur" });
         res.json(result);
     });
-
 });
 
+/**
+ * ➤ ROUTE : Récupérer tous les articles en promotions
+ */
 router.get("/article/promotions/", (req, res) => {
     db.query("SELECT article.*, promotions.* FROM article JOIN article_promotions ON article.article_id = article_promotions.article_id JOIN promotions ON promotions.promotion_id = article_promotions.promotion_id;", (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur du chargement des articles en promotions."})
@@ -144,8 +146,33 @@ router.get("/article/promotions/", (req, res) => {
 })
 
 /**
+ * ➤ ROUTE : Récupérer tous les tags des articles.
+ */
+router.get("/article/tags/:id", (req, res) => {
+    const { id } = req.params
+    db.query("SELECT tags.* from article JOIN article_tags on article.article_id = article_tags.article_id JOIN tags on article_tags.tag_id = tags.tag_id WHERE article.article_id = ?;", [id], (err, result) => {
+        if (err) {
+            console.error("Database query error:", err);
+            return res.status(500).json({ message: "Erreur du chargement des tags." });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Article non trouvé" });
+        }
+        return res.status(200).json(result);
+    })
+})
+
+router.get("/article/categorie/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("SELECT COUNT(article.article_id) AS ID FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+        if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
+        return res.status(200).json(result);
+    })
+})
+
+/**
  * ➤ ROUTE : Récupérer un produit par son ID
- * ➤ URL : GET /api/article/:id
+ * ➤ URL : GET /api/article/ : id
  * ➤ Exemple d'utilisation : GET /api/article/1
  */
 router.get("/article/:id", (req, res) => {

@@ -1,0 +1,158 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Carousel Section */
+.carousel-top {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-top menu ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    overflow-x: auto;
+}
+
+.carousel-top .cards {
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.carousel-top .cards:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-top .cards .textarea {
+    padding: 15px;
+}
+
+.carousel-top .cards .tags span {
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.carousel-top .cards .details .title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.carousel-top .cards .details .desc {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.carousel-top .cards .details span {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.carousel-top .cards .details p {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.carousel-top .cards .details a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.carousel-top .cards .details a:hover {
+    background-color: #2980b9;
+}
+
+/* Product Details Section */
+.product-details {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product-details > div {
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+}
+
+.product-details h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #555;
+}
+
+/* Additional Styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.annimation-promo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    animation: spin 3s linear infinite;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333333;
+}
+
+.--rotate-0 { transform: rotate(15deg); }
+.--rotate-15 { transform: rotate(30deg); }
+.--rotate-30 { transform: rotate(45deg); }
+.--rotate-45 { transform: rotate(60deg); }
+.--rotate-60 { transform: rotate(75deg); }
+.--rotate-75 { transform: rotate(90deg); }
+
+@keyframes spisn {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
