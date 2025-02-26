@@ -74,7 +74,7 @@ router.post('/users/avis', (req, res) => {
 router.post("/achat/create", (req, res) => {
     const { achat_quantity, article_id } = req.body;
 
-    db.query("SELECT article_stock, article_prix, FROM Article WHERE article_id = ?", [article_id], (err, results) => {
+    db.query("SELECT article_stock, article_prix FROM Article WHERE article_id = ?", [article_id], (err, results) => {
         if (err) return res.status(500).json({ message: "Erreur lors de la récupération de l'article." });
         if (results.length === 0) return res.status(404).json({ message: "Article non trouvé." });
         if (results[0].article_stock < achat_quantity) return res.status(406).json({ message: "Stock insuffisant.", stock_dispo: results[0].article_stock });

@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "../styles/accueil.css";
 import CategoryComponent from "../components/CategoryComponent";
+import {FaShoppingBasket} from "react-icons/fa";
 
 function Accueil() {
+    const navigate = useNavigate();
     const [article, setArticle] = useState([]);
     const [promo, setPromo] = useState([]);
     const [tagsMap, setTagsMap] = useState({});
+    const [nav, setNav] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:3001/api/article")
             .then((articles) => {
                 setArticle(articles.data);
+                console.log(article)
             }).catch((err) => console.error(err));
-    }, []);
+    }, [article]);
 
     useEffect(() => {
         axios.get("http://localhost:3001/api/article/promotions")
@@ -45,30 +49,49 @@ function Accueil() {
         return newPrice.toFixed(2);
     }
 
+    useEffect(() => {
+        if(nav != null) {
+            navigate(nav);
+        }
+    }, [nav, navigate]);
+
     return (
         <>
-            <section className={"carousel-top"}>
+            <section className="carousel-top">
                 <menu>
                     <ul>
-                        {promo.map((article) => (
-                            <li className={"cards"} key={article.article_id}>
-                                <Link to={`/shop/article/article_id?=${article.article_id}`}></Link>
-                                <span>-{Math.round(article.promotion_discount)}%</span>
-                                <img src="/cafthe.png" alt="article-en-promotion" width={50} height={50} />
+                        {promo.map((article, index) => (
+                            <li className={`cards item${index+1}`} key={index} onClick={() => {setNav(""); setNav(`/shop/article/article_id?=${article.article_id}`)} }>
+                                <div className="animation-promo">
+                                    <div className="container">
+                                        <span className="box --rotate-0"></span>
+                                        <span className="box --rotate-15"></span>
+                                        <span className="box --rotate-30"></span>
+                                        <span className="box --rotate-45"></span>
+                                        <span className="box --rotate-75"></span>
+                                        <span className="box --rotate-60"></span>
+                                    </div>
+                                    <p>-{Math.round(article.promotion_discount)}%</p>
+                                </div>
+                                <div className={"box-img"}>
+                                    <img src={"/cafthe.png"}  alt="article-en-promotion" />
+                                </div>
                                 <div className="textarea">
-                                    <div className={"tags"}>
+                                    <div className="tags">
                                         {tagsMap[article.article_id]?.map((tag, index) => (
                                             <span key={index}> {tag.tag_name} </span>
                                         ))}
                                     </div>
-                                    <div className={"details"}>
-                                        <h2 className={"title"}>{article.article_name}</h2>
-                                        <p className={"desc"}>{article.article_desc}</p>
-                                        <div className={""}>
+                                    <div className="details">
+                                        <h2 className="title">{article.article_name}</h2>
+                                        <p className="desc">{article.article_desc}</p>
+                                        <div className={"price"}>
                                             <span>{article.article_prix}€</span>
                                             <p>{reducePrice(article.article_prix, article.promotion_discount)}€</p>
-                                            <Link to={`/card/add/article/${article.article_id}`}>Ajouté au panier</Link>
-                                            <Link to={"/"}>Acheté</Link>
+                                        </div>
+                                        <div className={"actions"}>
+                                            <button onClick={() => {setNav(""); setNav(`/card/add/article/${article.article_id}`)}}><FaShoppingBasket/></button>
+                                            <button onClick={() => {setNav(""); setNav("/")}}>Acheter</button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +106,7 @@ function Accueil() {
                     <CategoryComponent number={1} />
                 </div>
                 <div className={"acessoires"}>
-                    <h2>Accesoires</h2>
+                    <h2>Accessoires</h2>
                     <CategoryComponent number={3} />
                 </div>
                 <div className={"the"}>
@@ -91,20 +114,7 @@ function Accueil() {
                     <CategoryComponent number={2} />
                 </div>
             </section>
-            <section>
-                <div className={"annimation-promo"}>
-                    <div className={"container"}>
-                        <span className={"box --rotate-0"}></span>
-                        <span className={"box --rotate-15"}></span>
-                        <span className={"box --rotate-30"}></span>
 
-                        <span className={"box --rotate-75"}></span>
-                        <span className={"box --rotate-60"}></span>
-                    </div>
-                    <p>-25%</p>
-                </div>
-
-            </section>
         </>
     );
 }

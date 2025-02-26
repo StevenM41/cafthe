@@ -48,7 +48,7 @@ function Navbars() {
                 <li>
                     <Link to={"/cart"}>
                         <i><IoCartSharp/></i>
-                            <span>Panier</span>
+                        <span>Panier</span>
                     </Link>
                 </li>
             </ul>
