@@ -4,43 +4,72 @@ h2, p, span, a, svg {
     text-decoration: none;
 }
 
+.promo {
+    background: #C7D1A5;
+    padding: 5px;
+    position: fixed;
+    width: 100%;
+    height: 24px;
+    z-index: 1000;
+}
+
+.promo p {
+    text-align: center;
+    color: #1B0D03;
+    font-weight: 700;
+}
+
 .header {
     position: fixed;
     width: 100%;
-    top: 0;
+    top: 24px;
     right: 0;
     z-index: 1000;
-    padding: 30px 7%;
+    padding: 20px 7%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     transition: all .50s ease;
     background: #C7D1A5;
+
+}
+
+.logo {
+    position: relative;
+    width: 120px;
 }
 
 .logo img {
-    width: 120px;
+    width: 100px;
     height: auto;
+    position: absolute;
+    top: -62px;
 }
 
 .navlist {
     display: flex;
 }
 
-.navlist a {
+.navlist a, .navlist label {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 15px;
+    margin: 0 25px;
     height: 60px;
-    width: 180px;
-    background: #7B9C64;
-    border-radius: 50px;
+    width: 60px;
     cursor: pointer;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
     transition: all .3s ease-out;
-    overflow: hidden;
     text-decoration: none;
+    flex-direction: column;
+}
+
+.navlist label i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    text-align: center;
 }
 
 .navlist a i {
@@ -50,30 +79,51 @@ h2, p, span, a, svg {
     height: 60px;
     width: 60px;
     text-align: center;
-    border-radius: 50px;
-    box-sizing: border-box;
 }
 
-.navlist a i svg {
+.navlist a i svg, .navlist label i svg {
     font-size: 35px;
+    transition: all .3s ease-out;
+}
+
+.navlist label:hover i svg {
+    transform: translateX(-280px);
+    transition: all .3s ease-out;
+    background: red;
+    border-radius: 50px;
 }
 
 .navlist a span {
     font-size: 20px;
     font-weight: 500;
     line-height: 60px;
-    margin-left: 10px;
-    display: none; /* Hide the text initially */
+    display: flex;
     transition: all .3s ease-out;
+    position: absolute;
+    transform: translateY(35px);
+    opacity: 0;
+}
+
+.navlist label span {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 60px;
+    display: flex;
+    transition: all .3s ease-out;
+    position: absolute;
+    opacity: 0;
 }
 
 .navlist a:hover span {
-    display: inline-block; /* Show the text on hover */
+    display: inline-block;
+    transition: all .3s ease-out;
+    transform: translateY(-40px);
+    opacity: 1;
 }
 
-.right-content {
-    display: flex;
-    align-items: center;
+.navlist label:hover span {
+    transition: all .3s ease-out;
+    opacity: 1;
 }
 
 .nav-btn {
@@ -90,7 +140,6 @@ h2, p, span, a, svg {
 
 .nav-btn:hover {
     transform: translateY(-5px);
-    border: 2px solid ;
 }
 
 #menu-icon {

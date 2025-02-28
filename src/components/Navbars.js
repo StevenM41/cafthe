@@ -3,10 +3,11 @@ import React, {useContext} from 'react';
 import {AuthContext} from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import {IoCartSharp, IoHome} from "react-icons/io5";
-import {FaSearch, FaShoppingBasket} from "react-icons/fa";
+import {FaSearch} from "react-icons/fa";
 import {MdFavorite} from "react-icons/md";
 import "../styles/Header.css"
 import {RxHamburgerMenu} from "react-icons/rx";
+import {BsCupHotFill} from "react-icons/bs";
 
 function Navbars() {
     const { isAuthenticated, logout } = useContext(AuthContext);
@@ -29,7 +30,7 @@ function Navbars() {
                 </li>
                 <li>
                     <Link to={"/shop"}>
-                        <i><FaShoppingBasket/></i>
+                        <i><BsCupHotFill /></i>
                         <span>Boutique</span>
                     </Link>
                 </li>
