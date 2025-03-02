@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {AuthContext} from "../context/AuthContext";
 import {Link} from "react-router-dom";
@@ -8,8 +8,20 @@ import {MdFavorite} from "react-icons/md";
 import "../styles/Header.css"
 import {RxHamburgerMenu} from "react-icons/rx";
 import {BsCupHotFill} from "react-icons/bs";
+import axios from "axios";
 
 function Navbars() {
+
+    const [article, setArticle] = useState([]);
+    const [isFocused, setIsFocused] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+
+    useEffect( () => {
+        axios.get(`http://localhost:301/api/search/${searchValue}`)
+            .then((r) => setArticle(r.data))
+            .catch((err) => console.error(err));
+    }, [searchValue]);
+
     const { isAuthenticated, logout } = useContext(AuthContext);
     const handleLogout = () => {
         logout();
@@ -37,7 +49,17 @@ function Navbars() {
                 <li>
                     <label>
                         <i><FaSearch /></i>
-                        <span><input type={"text"} placeholder={"Veuillez saisir un article ici..."}/></span>
+                        <span>
+                            <input
+                                type={"text"}
+                                placeholder={"Veuillez saisir un article ici..."}
+                                className={`search-input ${isFocused || searchValue ? "expanded" : ""}`}
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => !searchValue && setIsFocused(false)}
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                            />
+                        </span>
                     </label>
                 </li>
                 <li>
@@ -53,7 +75,6 @@ function Navbars() {
                     </Link>
                 </li>
             </ul>
-
             <div className={"right-content"}>
                 {isAuthenticated ? (
                     <Link to={"/"} onClick={handleLogout} className={"nav-btn"}>
@@ -67,7 +88,6 @@ function Navbars() {
                 )}
                 <RxHamburgerMenu id={"menu-icon"}/>
             </div>
-
         </div>
     );
 }

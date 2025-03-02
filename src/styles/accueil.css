@@ -1,22 +1,19 @@
-
-
-
-/* Carousel Section */
 .carousel-top {
     padding: 60px 20px 20px 20px;
     background-color: #fff;
     overflow: hidden;
     display: flex;
     position: relative;
+    margin-top: 120px;
     width: 90%;
     height: 52vh;
     margin-inline: auto;
     mask-image: linear-gradient(
-        to right,
-        rgba(0,0,0,0),
-        rgba(0,0,0,1) 20%,
-        rgba(0,0,0,1) 80%,
-        rgba(0,0,0,0)
+            to right,
+            rgba(0,0,0,0),
+            rgba(0,0,0,1) 20%,
+            rgba(0,0,0,1) 80%,
+            rgba(0,0,0,0)
     );
 }
 
@@ -25,6 +22,7 @@
     padding: 0;
     display: flex;
 }
+
 .carousel-top li {
     display: flex;
     flex-direction: column;
@@ -34,13 +32,13 @@
 
 .carousel-top .box-img {
     position: absolute;
-    top: -25px; /* Ajustez cette valeur pour positionner l'image plus haut */
+    top: -25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .carousel-top .box-img img {
-    width: 130px; /* Ajustez cette valeur pour la largeur de l'image */
+    width: 130px;
     height: auto;
 }
 
@@ -53,31 +51,9 @@
     height: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: 0.9s;
-    animation: carrousel 40s linear infinite;
+    animation: carrousel 60s linear infinite;
     left: 100%;
     cursor: pointer;
-}
-
-.carousel-top .cards.item1 {
-    animation-delay: calc(40s / 7 * (7 - 1) * -1);
-}
-.carousel-top .cards.item2 {
-    animation-delay: calc(40s / 7 * (7 - 2) * -1);
-}
-.carousel-top .cards.item3 {
-    animation-delay: calc(40s / 7 * (7 - 3) * -1);
-}
-.carousel-top .cards.item4 {
-    animation-delay: calc(40s / 7 * (7 - 4) * -1);
-}
-.carousel-top .cards.item5 {
-    animation-delay: calc(40s / 7 * (7 - 5) * -1);
-}
-.carousel-top .cards.item6 {
-    animation-delay: calc(40s / 7 * (7 - 6) * -1);
-}
-.carousel-top .cards.item7 {
-    animation-delay: calc(40s / 7 * (7 - 7) * -1);
 }
 
 .carousel-top .cards:hover {

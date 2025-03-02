@@ -30,8 +30,11 @@ h2, p, span, a, svg {
     align-items: center;
     justify-content: space-between;
     transition: all .50s ease;
-    background: #C7D1A5;
+    background: rgba(199, 209, 165, 0.6);
+}
 
+.header:hover {
+    background: rgb(199, 209, 165);
 }
 
 .logo {
@@ -44,6 +47,10 @@ h2, p, span, a, svg {
     height: auto;
     position: absolute;
     top: -62px;
+}
+
+.navlist * {
+    transition: all .7s ease-out;
 }
 
 .navlist {
@@ -70,6 +77,16 @@ h2, p, span, a, svg {
     height: 60px;
     width: 60px;
     text-align: center;
+    border-radius: 50%;
+    z-index: 200;
+}
+
+.navlist label:hover i {
+    background: #7B9C64;
+    transform: translateX(-280px);
+    transition: all .7s ease-out;
+    border: 1px solid black;
+    border-radius: 50%;
 }
 
 .navlist a i {
@@ -83,14 +100,7 @@ h2, p, span, a, svg {
 
 .navlist a i svg, .navlist label i svg {
     font-size: 35px;
-    transition: all .3s ease-out;
-}
-
-.navlist label:hover i svg {
-    transform: translateX(-280px);
-    transition: all .3s ease-out;
-    background: red;
-    border-radius: 50px;
+    transition: all .7s ease-out;
 }
 
 .navlist a span {
@@ -100,7 +110,7 @@ h2, p, span, a, svg {
     display: flex;
     transition: all .3s ease-out;
     position: absolute;
-    transform: translateY(35px);
+    transform: translateY(10px);
     opacity: 0;
 }
 
@@ -112,18 +122,64 @@ h2, p, span, a, svg {
     transition: all .3s ease-out;
     position: absolute;
     opacity: 0;
+    z-index: 110;
 }
 
 .navlist a:hover span {
     display: inline-block;
-    transition: all .3s ease-out;
-    transform: translateY(-40px);
+    transition: all .5s ease-out;
+    transform: translateY(-30px);
     opacity: 1;
 }
 
 .navlist label:hover span {
-    transition: all .3s ease-out;
+    transition: all .5s ease-out;
     opacity: 1;
+}
+
+.navlist label span input {
+    background: #7B9C64;
+    border-radius: 60px;
+    width: 60px;
+    height: 60px;
+    z-index: 100;
+    border-collapse: unset;
+    text-indent: 65px;
+    font-size: 26px;
+}
+
+.navlist label:hover span input {
+    width: 620px;
+}
+
+.navlist label:has(input:focus) i {
+    background: #7B9C64;
+    transform: translateX(-280px);
+    transition: all .7s ease-out;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.navlist label:has(input:focus) span {
+    opacity: 1;
+}
+
+.navlist label:has(input:focus) span input {
+    opacity: 1;
+    width: 620px;
+}
+
+.navlist label span input::placeholder {
+    color: #1B0D03;
+}
+
+.navlist label:has(input:focus + input:has(input:empty)) span {
+    opacity: 1;
+}
+
+.navlist label:has(input:focus + input:has(input:empty)) span input {
+    opacity: 1;
+    width: 620px;
 }
 
 .nav-btn {

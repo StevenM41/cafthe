@@ -189,5 +189,13 @@ router.get("/article/:id", (req, res) => {
     });
 });
 
+router.get("/search/:article_name", (req, res) => {
+    const { article_name } = req.params.article_name;
+    db.query("SELECT * FROM article WHERE article.article_name LIKE '%?%'", [article_name], (err, result) => {
+        if(err) return res.status(500).json({ message: "Erreur de la recherche d'article par nom."});
+        if(result.length < 0) return res.status(404).json({message: "Article introuvable."})
+        return res.status(200).json(result);
+    })
+})
 
 module.exports = router;
