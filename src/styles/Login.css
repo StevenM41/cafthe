@@ -13,6 +13,7 @@ body {
 .login-page {
     display: flex;
     height: 100vh;
+    position: relative;
 }
 
 .left-page {
@@ -30,7 +31,13 @@ body {
 
 .error {
     position: absolute;
-    display: none;
+    display: inline-block;
+}
+
+.error-message {
+    color: red;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .right-page {
@@ -150,19 +157,28 @@ body {
 }
 
 .box-btn {
-    margin: 25px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 120px;
+    align-items: center;
 }
 
 .box-btn button {
     background: white;
     width: 60%;
-    height: 100%;
-    margin: 16px 0;
+    height: 50%;
     border-radius: 15px;
     font-size: 26px;
     font-weight: bold;
     border: none;
     box-shadow: 0 0 5px gray ;
+    cursor: pointer;
+}
+
+.box-btn button:active {
+    background: red;
 }
 
 

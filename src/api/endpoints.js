@@ -164,7 +164,7 @@ router.get("/article/tags/:id", (req, res) => {
 
 router.get("/article/categorie/:id", (req, res) => {
     const { id } = req.params;
-    db.query("SELECT COUNT(article.article_id) AS ID FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+    db.query("SELECT COUNT(article.article_id) AS ID, * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
         return res.status(200).json(result);
     })

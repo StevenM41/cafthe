@@ -11,7 +11,6 @@ import {BsCupHotFill} from "react-icons/bs";
 import axios from "axios";
 
 function Navbars() {
-
     const [article, setArticle] = useState([]);
     const [isFocused, setIsFocused] = useState(false);
     const [searchValue, setSearchValue] = useState("");

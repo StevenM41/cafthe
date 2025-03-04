@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../styles/Login.css"
 import {AuthContext} from "../../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
+import {ReCAPTCHA} from "react-google-recaptcha";
 
 function Login(props) {
     const { login } = useContext(AuthContext)
@@ -11,7 +12,6 @@ function Login(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorMsg, setErrorMsg] = useState("")
-    const [capVal, setCapVal] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,7 +42,7 @@ function Login(props) {
             </div>
             <div className={"error"}>
                 {errorMsg && (
-                    <div className={"error-message"}>{errorMsg}</div>
+                    <p className={"error-message"}>{errorMsg}</p>
                 )}
             </div>
             <div className="right-page">
@@ -61,7 +61,7 @@ function Login(props) {
                                 required
                             />
                             <label>Votre adresse email</label>
-                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={(e) => { setEmail('')}}/></button>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={() => { setEmail('')}}/></button>
                         </div>
                         <div className={"password-input"}>
                             <input
@@ -75,10 +75,10 @@ function Login(props) {
                                 required
                             />
                             <label>Votre mot de passe</label>
-                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"}/></button>
+                            <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={() => { setPassword('')}}/></button>
                         </div>
                         <div className={"box-btn"}>
-                            <button type={"submit"} disabled={!capVal} onClick={handleSubmit}>Connexion</button>
+                            <button type={"submit"} onClick={handleSubmit}>Connexion</button>
                         </div>
                         <Link to={"/reset-password"}>Mot de passe oublié ?</Link>
                         <div className={"divider"}></div>

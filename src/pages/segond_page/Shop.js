@@ -1,7 +1,5 @@
 import React from 'react';
-import Cafe from "../../components/productions/Cafe";
-import The from "../../components/productions/The";
-import Accessoirs from "../../components/productions/Accessoirs";
+import Produits from "../../components/productions/Produits";
 
 function Shop() {
 
@@ -11,9 +9,7 @@ function Shop() {
 
             <div></div>
 
-            <Cafe />
-            <The />
-            <Accessoirs />
+            <Produits />
         </>
     );
 }

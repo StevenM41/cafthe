@@ -55,7 +55,7 @@ function Accueil() {
                             <li
                                 className={`cards item${promo.indexOf(article) + 1}`}
                                 key={article.article_id}
-                                onClick={() => setNav(`/shop/article/article_id?=${article.article_id}`)}
+                                onClick={() => setNav(`/shop/article/${article.article_id}`)}
                                 style={{
                                     animationDelay: `calc(60s / ${promo.length} * (${promo.length} - ${promo.indexOf(article)}) * -1)`,
                                 }}
