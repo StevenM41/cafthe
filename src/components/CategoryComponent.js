@@ -5,7 +5,7 @@ const CategoryComponent = ({ number }) => {
     const [categorie, setCategorie] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/article/categorie/${number}`)
+        axios.get(`http://localhost:3001/api/article/categorie/count/${number}`)
             .then((response) => {
                 setCategorie(response.data);
             })

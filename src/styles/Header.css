@@ -12,6 +12,7 @@ h2, p, span, a, svg {
     height: 24px;
     z-index: 1000;
     top: 0;
+    display: none;
 }
 
 .promo p {
@@ -32,6 +33,7 @@ h2, p, span, a, svg {
     justify-content: space-between;
     transition: all .50s ease;
     background: rgba(199, 209, 165, 0.6);
+    display: none;
 }
 
 .header:hover {

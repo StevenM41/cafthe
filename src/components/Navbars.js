@@ -16,7 +16,8 @@ function Navbars() {
     const [searchValue, setSearchValue] = useState("");
 
     useEffect( () => {
-        axios.get(`http://localhost:301/api/search/${searchValue}`)
+        if(searchValue === null) return;
+        axios.get(`http://localhost:3001/api/search/${searchValue}`)
             .then((r) => setArticle(r.data))
             .catch((err) => console.error(err));
     }, [searchValue]);

@@ -164,7 +164,15 @@ router.get("/article/tags/:id", (req, res) => {
 
 router.get("/article/categorie/:id", (req, res) => {
     const { id } = req.params;
-    db.query("SELECT COUNT(article.article_id) AS ID, * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+    db.query("SELECT * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+        if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
+        return res.status(200).json(result);
+    })
+})
+
+router.get("/article/categorie/count/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("SELECT COUNT(article.article_id) AS ID FROM article WHERE categorie_id = 1;", [id], (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
         return res.status(200).json(result);
     })
@@ -176,7 +184,7 @@ router.get("/article/categorie/:id", (req, res) => {
  * ➤ Exemple d'utilisation : GET /api/article/1
  */
 router.get("/article/:id", (req, res) => {
-    const { id } = req.params.id;
+    const { id } = req.params;
 
     db.query("SELECT * FROM article WHERE article_id = ?", [id], (err, result) => {
         if (err) {
@@ -190,7 +198,9 @@ router.get("/article/:id", (req, res) => {
 });
 
 router.get("/search/:article_name", (req, res) => {
-    const { article_name } = req.params.article_name;
+    const { article_name } = req.params;
+
+    if(article_name === null) return res.status(411).json({ message: "article_name can not be null"})
     db.query("SELECT * FROM article WHERE article.article_name LIKE '%?%'", [article_name], (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur de la recherche d'article par nom."});
         if(result.length < 0) return res.status(404).json({message: "Article introuvable."})
