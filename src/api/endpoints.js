@@ -53,6 +53,8 @@ router.post("/users/login", (req, res) => {
                     id: user.user_id,
                     nom: user.user_name,
                     prenom: user.user_prenom,
+                    profile: user.profile_img,
+                    role: "client"
                 }
             })
         })
@@ -162,9 +164,17 @@ router.get("/article/tags/:id", (req, res) => {
     })
 })
 
-router.get("/article/categorie/:id", (req, res) => {
+router.get("/article/c/categorie/:id", (req, res) => {
     const { id } = req.params;
     db.query("SELECT COUNT(article.article_id) AS ID, * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+        if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
+        return res.status(200).json(result);
+    })
+})
+
+router.get("/article/categorie/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("SELECT * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
         return res.status(200).json(result);
     })
@@ -176,7 +186,7 @@ router.get("/article/categorie/:id", (req, res) => {
  * ➤ Exemple d'utilisation : GET /api/article/1
  */
 router.get("/article/:id", (req, res) => {
-    const { id } = req.params.id;
+    const { id } = req.params;
 
     db.query("SELECT * FROM article WHERE article_id = ?", [id], (err, result) => {
         if (err) {

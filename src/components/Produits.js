@@ -4,7 +4,7 @@ import Accessoirs from "./Accessoirs";
 import Cafe from "./Cafe";
 import The from "./The";
 
-function Produits(props) {
+function Produits() {
     const [id, setID] = useState( 0);
     const [article, setArticle] = useState([]);
 

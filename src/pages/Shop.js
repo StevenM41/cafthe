@@ -1,14 +1,13 @@
 import React from 'react';
-import Produits from "../../components/productions/Produits";
+import Produits from "../components/Produits";
 
 function Shop() {
 
     return (
         <>
+            <div>
 
-
-            <div></div>
-
+            </div>
             <Produits />
         </>
     );

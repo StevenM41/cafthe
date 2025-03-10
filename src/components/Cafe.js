@@ -1,7 +1,9 @@
 import React from 'react';
 
 
-function Cafe() {
+function Cafe({ article }) {
+    console.log(article);
+
     return (
         <div></div>
     );

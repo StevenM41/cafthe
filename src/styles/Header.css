@@ -1,210 +1,186 @@
-h2, p, span, a, svg {
-    font-family: 'Poppins', sans-serif;
-    color: #1B0D03;
-    text-decoration: none;
+:root {
+    --bg-color: #598032;
+    --text-color: #FCEDB1;
+    --border: #1B0D03;
 }
 
-.promo {
-    background: #C7D1A5;
-    padding: 5px;
-    position: fixed;
+menu {
+    height: 100px;
+    background: var(--bg-color);
     width: 100%;
-    height: 24px;
-    z-index: 1000;
-    top: 0;
+    cursor: default;
 }
 
-.promo p {
-    text-align: center;
-    color: #1B0D03;
-    font-weight: 700;
-}
-
-.header {
-    position: fixed;
-    width: 100%;
-    top: 24px;
-    right: 0;
-    z-index: 1000;
-    padding: 20px 7%;
+menu ul {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    transition: all .50s ease;
-    background: rgba(199, 209, 165, 0.6);
-}
-
-.header:hover {
-    background: rgb(199, 209, 165);
-}
-
-.logo {
-    position: relative;
-    width: 120px;
-}
-
-.logo img {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    top: -60px;
-}
-
-.navlist * {
-    transition: all .7s ease-out;
-}
-
-.navlist {
-    display: flex;
-}
-
-.navlist a, .navlist label {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 0 25px;
-    height: 60px;
-    width: 60px;
-    cursor: pointer;
-    transition: all .3s ease-out;
-    text-decoration: none;
-    flex-direction: column;
 }
 
-.navlist label i {
+menu .logo_title {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    width: 60px;
+    width: auto;
+    height: 100px;
+    transform: translateX(100px);
+    gap: 20px;
+}
+
+menu .logo_title h1 {
+    display: flex;
     text-align: center;
-    border-radius: 50%;
-    z-index: 200;
-}
-
-.navlist label:hover i {
-    background: #7B9C64;
-    transform: translateX(-280px);
-    transition: all .7s ease-out;
-    border: 1px solid black;
-    border-radius: 50%;
-}
-
-.navlist a i {
-    display: flex;
     align-items: center;
+    padding: 7px;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+    color: var(--text-color);
+}
+
+menu .logo_title img {
+    width: auto;
+    margin: 5px;
+}
+
+menu .searchbar {
+    display: flex;
+    width: 800px;
+    height: 100px;
     justify-content: center;
-    height: 60px;
-    width: 60px;
-    text-align: center;
+    align-items: center;
 }
 
-.navlist a i svg, .navlist label i svg {
-    font-size: 35px;
-    transition: all .7s ease-out;
-}
-
-.navlist a span {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 60px;
+menu .searchbar span {
     display: flex;
-    transition: all .3s ease-out;
-    position: absolute;
-    transform: translateY(10px);
-    opacity: 0;
+    background: var(--text-color);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    transform: translateX(30px);
+    justify-content: center;
+    align-items: center;
 }
 
-.navlist label span {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 60px;
-    display: flex;
-    transition: all .3s ease-out;
-    position: absolute;
-    opacity: 0;
-    z-index: 110;
-}
-
-.navlist a:hover span {
-    display: inline-block;
-    transition: all .5s ease-out;
-    transform: translateY(-30px);
-    opacity: 1;
-}
-
-.navlist label:hover span {
-    transition: all .5s ease-out;
-    opacity: 1;
-}
-
-.navlist label span input {
-    background: #7B9C64;
-    border-radius: 60px;
-    width: 60px;
-    height: 60px;
-    z-index: 100;
-    border-collapse: unset;
-    text-indent: 65px;
+menu .searchbar span .search-logo {
     font-size: 26px;
 }
 
-.navlist label:hover span input {
-    width: 620px;
+menu .searchbar input {
+    width: 500px;
+    height: 50px;
+    border: 1px solid var(--border);
+    background: var(--text-color);
+    border-radius: 0 25px 25px 0;
+    text-indent: 34px;
+    font-size: 18px;
+    color: var(--border);
+    outline: none;
 }
 
-.navlist label:has(input:focus) i {
-    background: #7B9C64;
-    transform: translateX(-280px);
-    transition: all .7s ease-out;
-    border: 1px solid black;
-    border-radius: 50%;
+menu .searchbar input:focus::placeholder {
+    color: var(--text-color);
 }
 
-.navlist label:has(input:focus) span {
-    opacity: 1;
+menu .searchbar input::placeholder {
+    color: var(--border);
 }
 
-.navlist label:has(input:focus) span input {
-    opacity: 1;
-    width: 620px;
+menu .searchbar .send-logo {
+    font-size: 30px;
+    transform: translateX(-50px);
 }
 
-.navlist label span input::placeholder {
-    color: #1B0D03;
-}
-
-.navlist label:has(input:focus + input:has(input:empty)) span {
-    opacity: 1;
-}
-
-.navlist label:has(input:focus + input:has(input:empty)) span input {
-    opacity: 1;
-    width: 620px;
-}
-
-.nav-btn {
-    display: inline-block;
-    padding: 9px 24px;
-    background: transparent;
-    border: 2px solid #1B0D03;
-    border-radius: 7px;
-    color: #1B0D03;
-    font-size: 15px;
-    font-weight: 500;
-    transition: all .6s ease;
-}
-
-.nav-btn:hover {
-    transform: translateY(-5px);
-}
-
-#menu-icon {
-    font-size: 42px;
-    z-index: 10001;
+menu .searchbar .send-logo:hover {
     cursor: pointer;
-    margin-left: 25px;
-    display: none;
+}
+
+menu ul .login {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+menu ul .login .cart-connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+menu ul .login a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 24px;
+    margin: 8px;
+}
+
+menu ul .login .separator {
+    display: inline-block;
+    width: 220px;
+    height: 4px;
+    background-color: var(--text-color);
+    margin: 0 10px;
+    vertical-align: middle;
 }
 
 
+/*
+        <div className={"cart-profile client"}>
+            <Profile user={user}/>
+            <p>{user.nom}</p>
+            <span className={"separator"}></span>
+            <p>{user.prenom}</p>
+        </div>
+
+            if(user.profile_img) return (<img src={'/profile-'+ user.id + ".png"} alt={"Profile avatars"} />);
+            else return (<span className={"img_profile"}><FaUser /></span>);
+*/
+
+menu ul .cart-profile {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+menu ul .cart-profile .img_profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--text-color);
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+menu ul .cart-profile .img_profile svg {
+    font-size: 28px;
+}
+
+menu ul .cart-profile .info {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+menu ul .cart-profile .info p {
+    margin: 4px;
+    transform: translateX(-6px);
+    font-size: 26px;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+menu ul .cart-profile.client .separator {
+    width: 150px;
+}
+
+menu ul .cart-profile.vendeur .separator, menu ul .cart-profile.admin .separator {
+    width: 210px;
+}
