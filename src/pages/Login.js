@@ -1,11 +1,10 @@
 import React, {useContext, useState} from 'react';
 import axios from "axios";
-import "../../styles/Login.css"
-import {AuthContext} from "../../context/AuthContext";
+import "../styles/Login.css"
+import {AuthContext} from "../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
-import {ReCAPTCHA} from "react-google-recaptcha";
 
-function Login(props) {
+function Login() {
     const { login } = useContext(AuthContext)
     const navigate = useNavigate();
 
@@ -20,10 +19,8 @@ function Login(props) {
         try {
             const responce = await axios.post("http://localhost:3001/api/users/login", {user_email: email, user_password: password});
             const {token, client} = responce.data;
-
-            console.log(token, client);
-
             login(token, client);
+
             navigate("/")
         } catch (error) {
             console.error("Erreur de lors de la connexion", error);

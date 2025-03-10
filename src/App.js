@@ -4,10 +4,10 @@ import Accueil from "./pages/Accueil";
 import React from "react";
 import {AuthProvider} from "./context/AuthContext";
 
-import Login from "./pages/other_page/Login";
+import Login from "./pages/Login";
 
 import "../src/styles/reset.css"
-import Shop from "./pages/segond_page/Shop";
+import Shop from "./pages/Shop";
 
 function App() {
     return (

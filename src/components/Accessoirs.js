@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Accessoirs() {
+function Accessoirs(props) {
     return (
         <div></div>
     );
