@@ -8,14 +8,14 @@ import '../styles/Header.css'
 function Profile({ user }) {
     const navigate = useNavigate();
     if(user.profile_img) return (<img src={'/profile-'+ user.id + ".png"} alt={"Profile avatars"} />);
-    else return (<span className={"img_profile"} onClick={() => navigate(`/account/${user.id}/settings`)}><FaUser /></span>);
+    else return (<span className={"img_profile"} onClick={() => navigate(`/account/settings/`)}><FaUser /></span>);
 }
 
 function Header() {
     const navigate  = useNavigate();
 
     const [text, setText] = useState("");
-    const { isAuthenticated, isAdmin, isVendeur, user} = useContext(AuthContext);
+    const { isAuthenticated, user} = useContext(AuthContext);
 
 
     function initArticle(text) {
@@ -50,25 +50,7 @@ function Header() {
                         } }/>
                     </li>
                     <li className={"login"}>
-                        {isAuthenticated ? ( isAdmin ? (
-                            <div className={"cart-profile admin"}>
-                                <Profile user={user}/>
-                                <div className={"info"}>
-                                    <p>Administrateur</p>
-                                    <span className={"separator"}></span>
-                                    <p>{user.nom} {user.prenom.toUpperCase()}</p>
-                                </div>
-                            </div>
-                        ) : isVendeur ? (
-                            <div className={"cart-profile vendeur"}>
-                                <Profile user={user}/>
-                                <div className={"info"}>
-                                    <p>Vendeur</p>
-                                    <span className={"separator"}></span>
-                                    <p>{user.nom} {user.prenom.toUpperCase()}</p>
-                                </div>
-                            </div>
-                        ) : (
+                        {isAuthenticated ? (
                             <div className={"cart-profile client"}>
                                 <Profile user={user}/>
                                 <div className={"info"}>
@@ -77,13 +59,13 @@ function Header() {
                                     <p>{user.prenom.toUpperCase()}</p>
                                 </div>
                             </div>
-                        )) : (
+                        ) : (
                         <div className={"cart-connexion"}>
                             <Link to={"/login"}>Connexion</Link>
                             <span className={"separator"}></span>
                             <Link to={"/register"}>Inscription</Link>
                         </div>
-                    )}
+                        )}
                     </li>
                 </ul>
             </menu>

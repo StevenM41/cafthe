@@ -22,7 +22,7 @@ function Accueil() {
             const tagsMap = {};
             for (const article of promo) {
                 try {
-                    const response = await axios.get(`http://localhost:3001/api/article/tags/${article.article_id}`);
+                    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/article/tags/${article.article_id}`);
                     tagsMap[article.article_id] = response.data;
                 } catch (error) {
                     console.error("Erreur lors de la récupération des tags :", error);
