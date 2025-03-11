@@ -130,13 +130,16 @@ router.post("/panier/create", (req, res) => {
 /**
  * ➤ ROUTE : Récupérer tous les articles
  */
-router.get("/article",  (req, res) => {
-    db.query("SELECT * FROM article", (err, result) => {
-        if (err) return res.status(500).json({ message: "Erreur serveur" });
-        res.json(result);
+router.get("/article", (req, res) => {
+    db.query("SELECT * FROM article", (err, results) => {
+        if (err) {
+            console.error("Erreur lors de la récupération des articles :", err);
+            return res.status(500).json({ message: "Erreur serveur" });
+        }
+
+        res.json(results);
     });
 });
-
 /**
  * ➤ ROUTE : Récupérer tous les articles en promotions
  */
@@ -166,7 +169,15 @@ router.get("/article/tags/:id", (req, res) => {
 
 router.get("/article/c/categorie/:id", (req, res) => {
     const { id } = req.params;
-    db.query("SELECT COUNT(article.article_id) AS ID, * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+    db.query("SELECT * FROM article WHERE categorie_id = ?;", [id], (err, result) => {
+        if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
+        return res.status(200).json(result);
+    })
+})
+
+router.get("/article/categorie/count/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("SELECT COUNT(article.article_id) AS ID FROM article WHERE categorie_id = 1;", [id], (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur du chargement des catégories"});
         return res.status(200).json(result);
     })
@@ -188,19 +199,41 @@ router.get("/article/categorie/:id", (req, res) => {
 router.get("/article/:id", (req, res) => {
     const { id } = req.params;
 
-    db.query("SELECT * FROM article WHERE article_id = ?", [id], (err, result) => {
+    // Vérification 1: S'assurer que l'ID est fourni
+    if (!id) {
+        return res.status(400).json({ message: "ID de l'article manquant" });
+    }
+
+    // Vérification 2: S'assurer que l'ID est un nombre entier positif
+    const articleId = parseInt(id, 10);
+    if (isNaN(articleId) || articleId <= 0) {
+        return res.status(400).json({ message: "ID de l'article invalide" });
+    }
+
+    // Requête à la base de données
+    db.query("SELECT * FROM article WHERE article_id = ?", [articleId], (err, result) => {
+        // Vérification 3: Gérer les erreurs de base de données
         if (err) {
+            console.error("Erreur de base de données:", err);
             return res.status(500).json({ message: "Erreur serveur" });
         }
+
+        // Vérification 4: Vérifier si l'article existe
         if (result.length === 0) {
             return res.status(404).json({ message: "Article non trouvé" });
         }
+
+        // Retourner l'article trouvé
         res.json(result[0]);
     });
 });
 
+
 router.get("/search/:article_name", (req, res) => {
-    const { article_name } = req.params.article_name;
+    const { article_name } = req.params;
+
+    if(article_name === null) return res.status(411).json({ message: "article_name can not be null"})
+
     db.query("SELECT * FROM article WHERE article.article_name LIKE '%?%'", [article_name], (err, result) => {
         if(err) return res.status(500).json({ message: "Erreur de la recherche d'article par nom."});
         if(result.length < 0) return res.status(404).json({message: "Article introuvable."})
