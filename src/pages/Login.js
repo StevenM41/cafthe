@@ -17,7 +17,7 @@ function Login() {
         setErrorMsg("");
 
         try {
-            const responce = await axios.post("http://localhost:3001/api/users/login", {user_email: email, user_password: password});
+            const responce = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {user_email: email, user_password: password});
             const {token, client} = responce.data;
             login(token, client);
 

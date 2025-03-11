@@ -1,10 +1,9 @@
 import React from 'react';
 
-function Cafe() {
-
+function Forum(props) {
     return (
         <div></div>
     );
 }
 
-export default Cafe;
+export default Forum;

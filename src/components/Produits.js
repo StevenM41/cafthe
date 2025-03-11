@@ -10,11 +10,11 @@ function Produits() {
 
     useEffect(() => {
         if(id === 0) {
-            axios.get(`http://localhost:3001/api/article`)
+            axios.get(`${process.env.REACT_APP_API_URL}/api/article`)
                 .then((r) => setArticle(r.data))
                 .catch((err) => console.error("Erreur du chargement des articles.", err))
         } else {
-            axios.get(`http://localhost:3001/api/article/categorie/${id}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/api/article/categorie/${id}`)
                 .then((r) => setArticle(r.data))
                 .catch((err) => console.error("Erreur du chargement des article by categorie ID.", err))
         }
