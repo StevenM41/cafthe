@@ -56,22 +56,24 @@ function Navbars() {
                     <span className={"separator"}></span>
                     <span className={"separator last"}></span>
                     <ul className={"footer"}>
-                        {isAuthenticated ? (
-                            <>
-                                <li>
-                                    <Link to={"/account/settings"}>
-                                        <IoSettings/>
-                                        <p>Paramètre</p>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={'/'} onClick={handleLogout}>
-                                        <BiLogOut/>
-                                        <p>Déconnexion</p>
-                                    </Link>
-                                </li>
-                            </>
-                        ) : null}
+                        {
+                            isAuthenticated ? (
+                                <>
+                                    <li>
+                                        <Link to={"/account/settings"}>
+                                            <IoSettings/>
+                                            <p>Paramètre</p>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/'} onClick={handleLogout}>
+                                            <BiLogOut/>
+                                            <p>Déconnexion</p>
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : null
+                        }
                     </ul>
                 </label>
             </div>

@@ -1,9 +1,3 @@
-:root {
-    --bg-color: #598032;
-    --text-color: #FCEDB1;
-    --border: #1B0D03;
-}
-
 menu {
     height: 100px;
     background: var(--bg-color);

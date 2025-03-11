@@ -8,6 +8,8 @@ import Login from "./pages/Login";
 
 import "../src/styles/reset.css"
 import Shop from "./pages/Shop";
+import Forum from "./pages/Forum";
+import Cart from "./pages/Cart";
 
 function App() {
     return (
