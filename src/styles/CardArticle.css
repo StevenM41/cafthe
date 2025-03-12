@@ -1,0 +1,117 @@
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Crée 6 colonnes de largeur égale */
+    gap: 16px; /* Espace entre les cartes */
+    padding: 16px;
+    padding-left: 116px; /* Ajoute un espace de 100px à gauche, plus 16px de padding */
+    width: calc(100% - 100px); /* Ajuste la largeur pour tenir compte de l'espace à gauche */
+}
+
+/* Styles pour la carte d'article */
+.card-article {
+    width: 250px; /* Largeur fixe */
+    height: 375px; /* Hauteur fixe */
+    min-height: 375px; /* Hauteur minimale pour garantir la taille */
+    border: 2px solid #D2A15F;
+    border-radius: 15px;
+    background-color: #D2A15F;
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: .8s;
+    flex-grow: 1; /* Permet à la carte de s'étendre pour remplir l'espace disponible */
+}
+
+.card-article:hover {
+    transform: translateY(-5px);
+}
+
+.card-article .image {
+    width: 246px;
+    height: 180px;
+    min-height: 180px;
+    background: #FCEDB1;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-article .image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Assure que l'image est contenue dans le conteneur */
+    padding: 15px;
+}
+.card-article h2 {
+    color: #1B0D03;
+    font-size: 24px;
+    margin: 8px;
+}
+
+.card-article p {
+    color: #1B0D03;
+    font-size: 14px;
+    margin: 4px 8px 8px 8px;
+}
+
+.card-article .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px;
+}
+
+.card-article .tag {
+    background-color: #FCEDB1;
+    color: #1B0D03;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    white-space: nowrap; /* Empêche le texte de se couper */
+}
+
+.card-article .price {
+    color: #A26437;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-article .promo-price {
+    color: #BC7C44;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+
+.card-article .discount {
+    color: #D2A15F;
+    font-size: 1em;
+}
+
+.card-article button {
+    background-color: #598032;
+    color: #FDF7E4;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-article button:hover {
+    background-color: #7B9C64;
+}
+
+.card-article .cart-button {
+    background-color: #FCEDB1;
+    color: #1B0D03;
+    margin-left: 8px;
+}
+
+.card-article .cart-button:hover {
+    background-color: #FDF7E4;
+}

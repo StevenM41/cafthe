@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import '../styles/Tags.css'
 
 function Tags({ id }) {
     const [tags, setTags] = useState([]);
@@ -13,10 +14,10 @@ function Tags({ id }) {
     if(!tags) return (<></>);
 
     return (
-        <div>
-            {tags?.map((tag) => (
-                <div key={tag.tag_id}>
-                    <p>{tag.tag_name}</p>
+        <div className="tags">
+            {tags.map((tag) => (
+                <div key={tag.tag_id} className="tag">
+                    {tag.tag_name}
                 </div>
             ))}
         </div>

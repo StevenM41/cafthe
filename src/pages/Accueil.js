@@ -10,7 +10,7 @@ function Accueil() {
     const [nav, setNav] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:3001/api/article/promotions")
+        axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`)
             .then((r) => setPromo(r.data))
             .catch((err) => console.log(err));
     }, []);

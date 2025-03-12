@@ -6,7 +6,7 @@ import {AuthProvider} from "./context/AuthContext";
 
 import Login from "./pages/Login";
 
-import "../src/styles/reset.css"
+import "./styles/reset.css"
 import Shop from "./pages/Shop";
 import Forum from "./pages/Forum";
 import Cart from "./pages/Cart";
