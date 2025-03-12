@@ -9,7 +9,7 @@ function Layout() {
         <>
             <Header />
             <Navbars />
-            {/*<Outlet />*/}
+            <Outlet />
             <Footer />
         </>
     );
