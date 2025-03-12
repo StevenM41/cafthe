@@ -19,8 +19,7 @@ function Header() {
 
 
     function initArticle(text) {
-        navigate(`/shop/search?=${text}`)
-        setText('')
+        navigate(`/shop/?search=${text}`)
     }
 
     return (
