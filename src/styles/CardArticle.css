@@ -1,27 +1,28 @@
+.produits {
+    width: calc(100% - 100px); /* Ajuste la largeur pour tenir compte de l'espace à gauche */
+}
 
 .card-container {
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* Crée 6 colonnes de largeur égale */
-    gap: 16px; /* Espace entre les cartes */
+    gap: 30px;
     padding: 16px;
-    padding-left: 116px; /* Ajoute un espace de 100px à gauche, plus 16px de padding */
-    width: calc(100% - 100px); /* Ajuste la largeur pour tenir compte de l'espace à gauche */
+    padding-left: 126px;
 }
 
 /* Styles pour la carte d'article */
 .card-article {
     width: 250px; /* Largeur fixe */
+    min-width: 250px;
     height: 375px; /* Hauteur fixe */
     min-height: 375px; /* Hauteur minimale pour garantir la taille */
     border: 2px solid #D2A15F;
     border-radius: 15px;
     background-color: #D2A15F;
     box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     transition: .8s;
-    flex-grow: 1; /* Permet à la carte de s'étendre pour remplir l'espace disponible */
+    margin-top: 24px;
+    position: relative;
 }
 
 .card-article:hover {
@@ -42,13 +43,14 @@
 .card-article .image img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Assure que l'image est contenue dans le conteneur */
+    object-fit: contain;
     padding: 15px;
     box-sizing: border-box;
 }
+
 .card-article h2 {
     color: #1B0D03;
-    font-size: 24px;
+    font-size: 1.4rem;
     margin: 8px;
 }
 
@@ -72,7 +74,6 @@
     border-radius: 4px;
     padding: 4px 8px;
     font-size: 0.9em;
-    white-space: nowrap; /* Empêche le texte de se couper */
 }
 
 .card-article .price {
@@ -94,25 +95,29 @@
 }
 
 .card-article button {
-    background-color: #598032;
-    color: #FDF7E4;
+    background-color: #5662EA;
+    color: white;
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: 0.7s ease;
+    opacity: 0;
 }
 
-.card-article button:hover {
-    background-color: #7B9C64;
+.card-article .cart-achat {
+    position: absolute;
+    left: 8px;
+    bottom: 12px;
 }
 
 .card-article .cart-button {
-    background-color: #FCEDB1;
-    color: #1B0D03;
-    margin-left: 8px;
+    position: absolute;
+    right: 8px;
+    bottom: 12px;
 }
 
-.card-article .cart-button:hover {
-    background-color: #FDF7E4;
+.card-article:hover button {
+    opacity: 1;
+    transform: translateY(-5px);
 }

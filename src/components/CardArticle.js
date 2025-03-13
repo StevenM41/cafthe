@@ -50,45 +50,47 @@ function CardArticle({ p }) {
     }
 
     return (
-        <div className={"card-container"}>
-            {p.map((article) => {
-                const discount = getPromotionDiscount(article.article_id);
-                const isPromoActive = isPromotionActive(article.article_id);
-                return (
-                    <div key={article.article_id} className="card-article">
-                        <Alert id={article.article_id} />
-                        <div className={"image"}>
-                            <img src={'/wallpaper.png' || article.article_img} alt={article.article_name} className="card-article-img" />
-                        </div>
-                        <h2 className="card-article-title">{article.article_name}</h2>
-                        <p className="card-article-description">{article.article_desc}</p>
-                        <div className="tags">
-                            <Tags id={article.article_id} />
-                        </div>
-                        {isPromoActive ? (
-                            <div>
-                                <p className="price price-original">{article.article_prix}€</p>
-                                <p className="price price-discounted">{reducePrice(article.article_prix, discount)}€</p>
-                                <p className="discount">(-{discount}%)</p>
-                                <button className="button" onClick={() => createAchat(article.article_id)}>
-                                    Acheter pour {reducePrice(article.article_prix, discount)}€
-                                </button>
+        <section className={"produit"}>
+            <div className={"card-container"}>
+                {p.map((article) => {
+                    const discount = getPromotionDiscount(article.article_id);
+                    const isPromoActive = isPromotionActive(article.article_id);
+                    return (
+                        <div key={article.article_id} className="card-article">
+                            <Alert id={article.article_id} />
+                            <div className={"image"}>
+                                <img src={'/wallpaper.png' || article.article_img} alt={article.article_name} className="card-article-img" />
                             </div>
-                        ) : (
-                            <div>
-                                <p className="price">{article.article_prix}€</p>
-                                <button className="button" onClick={() => createAchat(article.article_id)}>
-                                    Acheter pour {article.article_prix}€
-                                </button>
+                            <h2 className="card-article-title">{article.article_name}</h2>
+                            <p className="card-article-description">{article.article_desc}</p>
+                            <div className="tags">
+                                <Tags id={article.article_id} />
                             </div>
-                        )}
-                        <button className="button cart-button" onClick={() => addToCart(article.article_id)}>
-                            <FaCartShopping />
-                        </button>
-                    </div>
-                );
-            })}
-        </div>
+                            {isPromoActive ? (
+                                <div>
+                                    <p className="price price-original">{article.article_prix}€</p>
+                                    <p className="price price-discounted">{reducePrice(article.article_prix, discount)}€</p>
+                                    <p className="discount">(-{discount}%)</p>
+                                    <button className="cart-achat" onClick={() => createAchat(article.article_id)}>
+                                        Acheter pour {reducePrice(article.article_prix, discount)}€
+                                    </button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className="price">{article.article_prix}€</p>
+                                    <button className="cart-achat" onClick={() => createAchat(article.article_id)}>
+                                        Acheter pour {article.article_prix}€
+                                    </button>
+                                </div>
+                            )}
+                            <button className="cart-button" onClick={() => addToCart(article.article_id)}>
+                                <FaCartShopping />
+                            </button>
+                        </div>
+                    );
+                })}
+            </div>
+        </section>
     );
 }
 

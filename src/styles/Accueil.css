@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    background: rgba(0, 0, 0, 0.7); /* Effet assombri pour mieux voir le texte */
+    background: rgba(0, 0, 0, 0.7);
     width: 500px;
     height: 300px;
     border-radius: 40px;
