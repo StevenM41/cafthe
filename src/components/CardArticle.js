@@ -17,11 +17,11 @@ function CardArticle({ p }) {
     }, []);
 
     function createAchat(id) {
-        navigate(`/cart?action=achat&article_id=${id}`);
+        navigate(`/pannier?action=achat&article_id=${id}`);
     }
 
     function addToCart(id) {
-        navigate(`/cart?action=add&article_id=${id}`);
+        navigate(`/shop?action=add&article_id=${id}`);
     }
 
     function reducePrice(price, reduce) {

@@ -44,6 +44,7 @@
     max-height: 100%;
     object-fit: contain; /* Assure que l'image est contenue dans le conteneur */
     padding: 15px;
+    box-sizing: border-box;
 }
 .card-article h2 {
     color: #1B0D03;

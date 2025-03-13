@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import "./styles/reset.css"
 import Shop from "./pages/Shop";
 import Forum from "./pages/Forum";
-import Cart from "./pages/Cart";
+import Panier from "./pages/Panier";
 import {CartContext} from "./context/CartContext";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
                       <Route index element={<Accueil />} />
                       <Route path={"shop"} element={<Shop />}/>
                       <Route path={"forum"} element={<Forum />}/>
-                      <Route path={"cart"} element={<Cart />}/>
+                      <Route path={"panier"} element={<Panier />}/>
                   </Route>
                   <Route path={"/login"} element={<Login />} />
               </Routes>

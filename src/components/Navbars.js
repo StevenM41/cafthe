@@ -13,12 +13,13 @@ import {FaCartShopping} from "react-icons/fa6";
 
 function Navbars() {
     const [active, setActive] = useState(false);
-    const [panier, setPanier] = useState([]);
-
+    const [showPopup, setShowPopup] = useState(false); // État pour gérer l'affichage du popup
     const { isAuthenticated, logout } = useContext(AuthContext);
+
     const handleLogout = () => {
         logout();
-    }
+        setShowPopup(false); // Ferme le popup après la déconnexion
+    };
 
     return (
         <nav>
@@ -54,31 +55,39 @@ function Navbars() {
                         </li>
                     </ul>
                     <span className={"separator"}></span>
-                    <span className={"separator last"}></span>
+                    {isAuthenticated && <span className={"separator last"}></span>}
                     <ul className={"footer"}>
-                        {
-                            isAuthenticated ? (
-                                <>
-                                    <li>
-                                        <Link to={"/account/settings"}>
-                                            <IoSettings/>
-                                            <p>Paramètre</p>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to={'/'} onClick={handleLogout}>
-                                            <BiLogOut/>
-                                            <p>Déconnexion</p>
-                                        </Link>
-                                    </li>
-                                </>
-                            ) : null
-                        }
+                        {isAuthenticated && (
+                            <>
+                                <li>
+                                    <Link to={"/account/settings"}>
+                                        <IoSettings/>
+                                        <p>Paramètre</p>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link onClick={() => setShowPopup(true)} className="logout-btn">
+                                        <BiLogOut/>
+                                        <p>Déconnexion</p>
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </label>
             </div>
+            {showPopup && (
+                <>
+                    <span className="bg-blur" onClick={() => setShowPopup(false)}></span>
+                    <div className="popus deconnexion">
+                        <h2>Déconnexion</h2>
+                        <p>Voulez-vous vraiment vous déconnecter ?</p>
+                        <button className="success" onClick={handleLogout}>Déconnexion</button>
+                        <button className="cancel" onClick={() => setShowPopup(false)}>Annuler</button>
+                    </div>
+                </>
+            )}
         </nav>
     );
 }
-
 export default Navbars;

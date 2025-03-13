@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import "../styles/accueil.css";
+import "../styles/Accueil.css";
 
 function Accueil() {
     const navigate = useNavigate();
@@ -40,7 +40,12 @@ function Accueil() {
 
     return (
         <>
-
+            <section className={"wallpaper"}>
+                <div className={"container"}>
+                    <h1>CAFTHÉ</h1>
+                    <button onClick={() => setNav('/shop')}>Voir les articles</button>
+                </div>
+            </section>
         </>
     );
 }

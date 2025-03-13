@@ -21,6 +21,7 @@ time, mark, audio, video {
     border: 0;
     font-size: 100%;
     vertical-align: baseline;
+    opacity: 1;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -46,7 +47,13 @@ table {
 }
 
 :root {
-    --bg-color: #598032;
+    --bg-color: rgb(89, 128, 50);
     --text-color: #FCEDB1;
     --border: #1B0D03;
+}
+
+
+body {
+    height: 100%;
+    font-family: Roboto, sans-serif;
 }
