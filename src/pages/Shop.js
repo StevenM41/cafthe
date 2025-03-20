@@ -22,7 +22,7 @@ function Shop() {
     const [filters, setFilters] = useState({
         categorie_id: categorieID,
         search: articleName,
-        tags: tagActive,
+        tags: tagActive.map((r) => r),
         price_min: value[0], // Min price
         price_max: value[1] // Max price
     });
@@ -31,7 +31,7 @@ function Shop() {
         setFilters({
             categorie_id: categorieID,
             search: articleName,
-            tags: tagActive,
+            tags: tagActive.map((r) => r),
             price_min: value[0],
             price_max: value[1]
         });
@@ -41,21 +41,17 @@ function Shop() {
         const fetchFilteredData = async () => {
             try {
                 let isFilterActive = filters.categorie_id !== 0 || filters.search !== "" || filters.price_min !== 10 || filters.price_max !== 200 || tagActive.length > 0;
-
                 if(filters.categorie_id === 0) filters.categorie_id = null;
 
                 if(filters.price_min > 10 || filters.price_max < 200) {
                     isFilterActive = true;
                 }
 
-                const url = isFilterActive
-                    ? `${process.env.REACT_APP_API_URL}/api/filtre`
-                    : `${process.env.REACT_APP_API_URL}/api/article`;
+                const url = isFilterActive ? `${process.env.REACT_APP_API_URL}/api/filtre` : `${process.env.REACT_APP_API_URL}/api/article`;
 
                 const result = await axios.get(url, {
                     params: filters
                 });
-
                 setArticle(result.data);
 
                 const tagsResult = await axios.get(`${process.env.REACT_APP_API_URL}/api/tags`);
@@ -81,12 +77,12 @@ function Shop() {
 
     const addTagsFiltrer = (t) => {
         setTagActive((currentTags) => {
-            const newTags = currentTags.includes(t.tag_name)
-                ? currentTags.filter((tagId) => tagId !== t.tag_name)
-                : [...currentTags, t.tag_name];
+            const newTags = currentTags.some((tag) => tag.tag_id === t.tag_id)
+                ? currentTags.filter((tag) => tag.tag_id !== t.tag_id)
+                : [...currentTags, t];
 
             // Mettre à jour setTag avec les tags qui ne sont pas dans tagActive
-            setTag(tags.filter((tag) => !newTags.includes(tag.tag_name)));
+            setTag(tags.filter((tag) => !newTags.some((ts) => ts.tag_id === tag.tag_id)));
 
             return newTags;
         });
@@ -94,9 +90,9 @@ function Shop() {
 
     const removeFiltrer = (t) => {
         setTagActive((currentTags) => {
-            const newTags = currentTags.filter((tagId) => tagId !== t);
+            const newTags = currentTags.filter((tag) => tag.tag_id !== t.tag_id);
 
-            setTag(tags.filter((tag) => !newTags.includes(tag.tag_name)));
+            setTag(tags.filter((tag) => !newTags.some((ts) => ts.tag_id === tag.tag_id)));
             return newTags;
         });
     };
@@ -105,45 +101,35 @@ function Shop() {
         <section className={"shop"}>
             <div className={"nav-links"}>
                 <button onClick={() => {if(categorieID === 1) setCategorieID(0); else setCategorieID(1)}}>Café</button>
-                <button onClick={() => {if(categorieID === 3) setCategorieID(0); else setCategorieID(3)}}>Accessoires</button>
+                <button onClick={() => {if(categorieID === 3) setCategorieID(0); else setCategorieID(3)}}>Accéssoires</button>
                 <button onClick={() => {if(categorieID === 2) setCategorieID(0); else setCategorieID(2)}}>Thé</button>
             </div>
             <div className={"filter"}>
-                <div className={"tags-container"}>
-                    <div className={"details"}>
-                        <p className={"categorie"}>Catégorie: {getCategorie(categorieID)}</p>
-                        <p className={"title-prix"}>Prix: Entre {value[0]}€ et {value[1]}€</p>
-                        {tagActive.length > 0 ? (
+                <div className="tags-container">
+                    <div className="details">
+                        <p className="categorie">Catégorie: {getCategorie(categorieID)}</p>
+                        <p className="title-prix">Prix: Entre {value[0]}€ et {value[1]}€</p>
+
+                        {tagActive.length > 0 && (
                             <ul>
-                                {tagActive.map((t, index) => (
-                                    <li className={"item active"} key={`${t}-${index}`} onClick={() => removeFiltrer(t)}>
+                                {tagActive.map((t) => (
+                                    <li className="item active" key={`${t.tag_id}`} onClick={() => removeFiltrer(t.tag_id)}>
                                         <IoMdPricetag />
-                                        <p>{t}</p>
+                                        <p>{t.tag_name}</p>
                                     </li>
                                 ))}
                             </ul>
-                        ) : null}
+                        )}
                     </div>
 
-                    {tagActive.length > 0 ?
-                        (<ul>
-                            {tag.map((t, index) => (
-                                <li className={"item"} key={`${t.tag_id}-${index}`} onClick={() => addTagsFiltrer(t)}>
-                                    <IoMdPricetag />
-                                    <p>{t.tag_name}</p>
-                                </li>
-                            ))}
-                        </ul>)
-                        :
-                        (<ul>
-                            {tags.map((t, index) => (
-                                <li className={"item"} key={`${t.tag_id}-${index}`} onClick={() => addTagsFiltrer(t)}>
-                                    <IoMdPricetag />
-                                    <p>{t.tag_name}</p>
-                                </li>
-                            ))}
-                        </ul>)
-                    }
+                    <ul>
+                        {(tagActive.length > 0 ? tag : tags).map((t) => (
+                            <li className="item" key={`${t.tag_id}`} onClick={() => addTagsFiltrer(t)}>
+                                <IoMdPricetag />
+                                <p>{t.tag_name}</p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 <div style={{ width: 300 }}>
                     <Slider
