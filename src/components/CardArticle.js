@@ -17,7 +17,7 @@ function CardArticle({ p }) {
     }, []);
 
     function createAchat(id) {
-        navigate(`/pannier?action=achat&article_id=${id}`);
+        navigate(`/card?action=achat&article_id=${id}`);
     }
 
     function addToCart(id) {
@@ -45,7 +45,6 @@ function CardArticle({ p }) {
         const startDate = new Date(promotion.promotion_start).getTime();
         const endDate = new Date(promotion.promotion_end).getTime();
         const currentDate = Date.now();
-
         return currentDate >= startDate && currentDate <= endDate;
     }
 
@@ -55,6 +54,7 @@ function CardArticle({ p }) {
                 {p.map((article) => {
                     const discount = getPromotionDiscount(article.article_id);
                     const isPromoActive = isPromotionActive(article.article_id);
+
                     return (
                         <div key={article.article_id} className="card-article">
                             <Alert id={article.article_id} />
@@ -71,19 +71,19 @@ function CardArticle({ p }) {
                                     <p className="price price-original">{article.article_prix}€</p>
                                     <p className="price price-discounted">{reducePrice(article.article_prix, discount)}€</p>
                                     <p className="discount">(-{discount}%)</p>
-                                    <button className="cart-achat" onClick={() => createAchat(article.article_id)}>
+                                    <button className="cart-achat" onClick={() => createAchat(article.article_id)} disabled={article.article_stock !== 0}>
                                         Acheter pour {reducePrice(article.article_prix, discount)}€
                                     </button>
                                 </div>
                             ) : (
                                 <div>
                                     <p className="price">{article.article_prix}€</p>
-                                    <button className="cart-achat" onClick={() => createAchat(article.article_id)}>
+                                    <button className="cart-achat" onClick={() => createAchat(article.article_id)} disabled={article.article_stock === 0}>
                                         Acheter pour {article.article_prix}€
                                     </button>
                                 </div>
                             )}
-                            <button className="cart-button" onClick={() => addToCart(article.article_id)}>
+                            <button className="cart-button" onClick={() => addToCart(article.article_id)} disabled={article.article_stock === 0}>
                                 <FaCartShopping />
                             </button>
                         </div>

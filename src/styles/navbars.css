@@ -82,7 +82,7 @@ nav .burger svg {
 
 .slider.active {
     height: 100%;
-    width: 360px;
+    width: 280px;
     transition: 1s;
 }
 
@@ -109,11 +109,11 @@ nav .burger svg {
 
 .slider .separator.last {
     position: absolute;
-    bottom: 250px;
+    bottom: 160px;
 }
 
 .slider.active .separator {
-    width: 334px;
+    width: 260px;
     transition: 1s;
 }
 

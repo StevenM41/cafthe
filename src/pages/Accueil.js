@@ -12,7 +12,7 @@ function Accueil() {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`)
             .then((r) => setPromo(r.data))
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
     }, []);
 
     useEffect(() => {

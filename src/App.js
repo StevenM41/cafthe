@@ -14,19 +14,19 @@ import {CartContext} from "./context/CartContext";
 
 function App() {
     return (
-      <AuthProvider>
-          <BrowserRouter>
-              <Routes>
-                  <Route path={"/"} element={<Layout />}>
-                      <Route index element={<Accueil />} />
-                      <Route path={"shop"} element={<Shop />}/>
-                      <Route path={"forum"} element={<Forum />}/>
-                      <Route path={"panier"} element={<Panier />}/>
-                  </Route>
-                  <Route path={"/login"} element={<Login />} />
-              </Routes>
-          </BrowserRouter>
-      </AuthProvider>
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={"/"} element={<Layout />}>
+                        <Route index element={<Accueil />} />
+                        <Route path={"shop"} element={<Shop />}/>
+                        <Route path={"forum"} element={<Forum />}/>
+                        <Route path={"panier"} element={<Panier />}/>
+                    </Route>
+                    <Route path={"/login"} element={<Login />} />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     );
 }
 

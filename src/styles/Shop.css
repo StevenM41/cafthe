@@ -1,0 +1,127 @@
+.shop {
+    width: calc(100% - 100px);
+    padding-left: 100px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    margin: 24px;
+    justify-content: center;
+}
+
+.nav-links button {
+    padding: 10px 20px;
+    border: none;
+    background: #2a2a2a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.nav-links button:hover {
+    background: #444;
+}
+
+.nav-links button:active {
+    transform: scale(0.95);
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 25px;
+}
+
+.details {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details .categorie {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+}
+
+.details ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.details .item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: #ddd;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.details .item.active {
+    background: #e0e0e0;
+    color: black;
+    margin: 5px;
+}
+
+.details .item.active:hover {
+    background: #c0c0c0;
+}
+
+.details .item:hover {
+    background: #bbb;
+    transform: scale(1.05);
+}
+
+.details p {
+    font-size: 14px;
+    color: #555;
+}
+
+.tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tags-container ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+}
+
+.tags-container .item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    background: #e0e0e0;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tags-container .item:hover {
+    background: #c0c0c0;
+}
+
+.tags-container .item p {
+    margin: 0;
+    color: #333;
+}

@@ -66,7 +66,7 @@ function Navbars() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link onClick={() => setShowPopup(true)} className="logout-btn">
+                                    <Link onClick={() => setShowPopup(true)} className="logout-btn" to={''}>
                                         <BiLogOut/>
                                         <p>Déconnexion</p>
                                     </Link>

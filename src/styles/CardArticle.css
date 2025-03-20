@@ -1,28 +1,21 @@
-.produits {
-    width: calc(100% - 100px); /* Ajuste la largeur pour tenir compte de l'espace à gauche */
-}
-
 .card-container {
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* Crée 6 colonnes de largeur égale */
     gap: 30px;
-    padding: 16px;
-    padding-left: 126px;
+    padding: 20px;
 }
 
 /* Styles pour la carte d'article */
 .card-article {
     width: 250px; /* Largeur fixe */
-    min-width: 250px;
     height: 375px; /* Hauteur fixe */
-    min-height: 375px; /* Hauteur minimale pour garantir la taille */
     border: 2px solid #D2A15F;
     border-radius: 15px;
     background-color: #D2A15F;
     box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
     transition: .8s;
-    margin-top: 24px;
     position: relative;
+    margin-top: 20px;
 }
 
 .card-article:hover {
@@ -104,6 +97,9 @@
     transition: 0.7s ease;
     opacity: 0;
 }
+.card-article button:disabled {
+     cursor: not-allowed;
+ }
 
 .card-article .cart-achat {
     position: absolute;
@@ -120,4 +116,23 @@
 .card-article:hover button {
     opacity: 1;
     transform: translateY(-5px);
+}
+
+.card-article:has(button:disabled) {
+    border: 2px solid #D2A15F;
+    background-color: #D2A15F;
+}
+
+.card-article .price {
+    position: absolute;
+    bottom: 10px;
+}
+
+.card-article .price.price-discounted {
+    left: 70px;
+    color: #4A760C;
+}
+
+.card-article .price.price-original {
+    color: #BB2D3B;
 }

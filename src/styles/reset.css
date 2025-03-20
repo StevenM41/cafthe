@@ -50,10 +50,11 @@ table {
     --bg-color: rgb(89, 128, 50);
     --text-color: #FCEDB1;
     --border: #1B0D03;
+    --bg-color-clair: rgba(123, 156, 100, 0.8);
 }
-
 
 body {
     height: 100%;
     font-family: Roboto, sans-serif;
+    background: var(--bg-color-clair);
 }

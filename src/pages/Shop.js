@@ -4,12 +4,15 @@ import axios from "axios";
 import CardArticle from "../components/CardArticle";
 import Slider from "rc-slider";
 import 'rc-slider/assets/index.css';
+import {IoMdPricetag} from "react-icons/io";
+import '../styles/Shop.css'
 
 function Shop() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const articleName = searchParams.get("search") || "";
 
+    const [tagActive, setTagActive] = useState([]);
     const [value, setValue] = useState([10, 200]); // [Min, Max] prix
     const [tag, setTag] = useState([]); // Liste des tags sélectionnés
     const [tags, setTags] = useState([]); // Liste des tags sélectionnés
@@ -19,7 +22,7 @@ function Shop() {
     const [filters, setFilters] = useState({
         categorie_id: categorieID,
         search: articleName,
-        tags: tag,
+        tags: tagActive,
         price_min: value[0], // Min price
         price_max: value[1] // Max price
     });
@@ -28,26 +31,17 @@ function Shop() {
         setFilters({
             categorie_id: categorieID,
             search: articleName,
-            tags: tag,
+            tags: tagActive,
             price_min: value[0],
             price_max: value[1]
         });
-    }, [categorieID, articleName, tag, value]);
-
-    const addTagsFiltrer = (id) => {
-        setTag((currentTags) => {
-            if (currentTags.includes(id)) {
-                return currentTags.filter((tagId) => tagId !== id);
-            } else {
-                return [...currentTags, id]; // Ajouter le tag
-            }
-        });
-    };
+    }, [categorieID, articleName, tagActive, value]);
 
     useEffect(() => {
         const fetchFilteredData = async () => {
             try {
-                let isFilterActive = filters.categorie_id !== 0 || filters.search !== "" || filters.price_min !== 10 || filters.price_max !== 200;
+                let isFilterActive = filters.categorie_id !== 0 || filters.search !== "" || filters.price_min !== 10 || filters.price_max !== 200 || tagActive.length > 0;
+
                 if(filters.categorie_id === 0) filters.categorie_id = null;
 
                 if(filters.price_min > 10 || filters.price_max < 200) {
@@ -78,10 +72,37 @@ function Shop() {
         setValue(newValue);
     };
 
-    console.log(filters);
+    function getCategorie(id) {
+        if(id === 1) return "Café"
+        if(id === 2) return "Thé"
+        if(id === 3) return "Accéssoires"
+        return "Toute";
+    }
+
+    const addTagsFiltrer = (t) => {
+        setTagActive((currentTags) => {
+            const newTags = currentTags.includes(t.tag_name)
+                ? currentTags.filter((tagId) => tagId !== t.tag_name)
+                : [...currentTags, t.tag_name];
+
+            // Mettre à jour setTag avec les tags qui ne sont pas dans tagActive
+            setTag(tags.filter((tag) => !newTags.includes(tag.tag_name)));
+
+            return newTags;
+        });
+    };
+
+    const removeFiltrer = (t) => {
+        setTagActive((currentTags) => {
+            const newTags = currentTags.filter((tagId) => tagId !== t);
+
+            setTag(tags.filter((tag) => !newTags.includes(tag.tag_name)));
+            return newTags;
+        });
+    };
 
     return (
-        <div>
+        <section className={"shop"}>
             <div className={"nav-links"}>
                 <button onClick={() => {if(categorieID === 1) setCategorieID(0); else setCategorieID(1)}}>Café</button>
                 <button onClick={() => {if(categorieID === 3) setCategorieID(0); else setCategorieID(3)}}>Accessoires</button>
@@ -89,11 +110,40 @@ function Shop() {
             </div>
             <div className={"filter"}>
                 <div className={"tags-container"}>
-                    {tags.map((t, index) => (
-                        <div key={`${t.tag_id}-${index}`} onClick={() => addTagsFiltrer(t.tag_id)}>
-                            <p>{t.tag_name}</p>
-                        </div>
-                    ))}
+                    <div className={"details"}>
+                        <p className={"categorie"}>Catégorie: {getCategorie(categorieID)}</p>
+                        <p className={"title-prix"}>Prix: Entre {value[0]}€ et {value[1]}€</p>
+                        {tagActive.length > 0 ? (
+                            <ul>
+                                {tagActive.map((t, index) => (
+                                    <li className={"item active"} key={`${t}-${index}`} onClick={() => removeFiltrer(t)}>
+                                        <IoMdPricetag />
+                                        <p>{t}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : null}
+                    </div>
+
+                    {tagActive.length > 0 ?
+                        (<ul>
+                            {tag.map((t, index) => (
+                                <li className={"item"} key={`${t.tag_id}-${index}`} onClick={() => addTagsFiltrer(t)}>
+                                    <IoMdPricetag />
+                                    <p>{t.tag_name}</p>
+                                </li>
+                            ))}
+                        </ul>)
+                        :
+                        (<ul>
+                            {tags.map((t, index) => (
+                                <li className={"item"} key={`${t.tag_id}-${index}`} onClick={() => addTagsFiltrer(t)}>
+                                    <IoMdPricetag />
+                                    <p>{t.tag_name}</p>
+                                </li>
+                            ))}
+                        </ul>)
+                    }
                 </div>
                 <div style={{ width: 300 }}>
                     <Slider
@@ -116,7 +166,7 @@ function Shop() {
                                 (<CardArticle p={article}/>)
                 }
             </div>
-        </div>
+        </section>
     );
 }
 
