@@ -1,5 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+import React, {createContext, useState, useEffect, use} from 'react';
 
 export const AuthContext = createContext(null);
 
@@ -8,8 +7,8 @@ export function AuthProvider({ children }) {
     const [token, setToken] = useState(null);
 
     useEffect(() => {
-        const storedToken = Cookies.get("token");
-        const storedUser = Cookies.get("user");
+        const storedToken = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
 
         if (storedUser && storedToken) {
             setToken(storedToken);
@@ -19,13 +18,14 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         if (token && user) {
-            Cookies.set("token", token, { expires: 7 }); // Expire after 7 days
-            Cookies.set("user", JSON.stringify(user), { expires: 7 });
+            localStorage.setItem("token", token.toString());
+            localStorage.setItem("user", JSON.stringify(user));
         } else {
-            Cookies.remove("token");
-            Cookies.remove("user");
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
         }
-    },  [token, user]);
+    }, [token, user]);
+
 
     const login = (jwt, userData) => {
         setToken(jwt);
@@ -35,8 +35,8 @@ export function AuthProvider({ children }) {
     const logout = () => {
         setToken(null);
         setUser(null);
-        Cookies.remove("token");
-        Cookies.remove("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
     };
 
     const value = { token, user, login, logout, isAuthenticated: !!token };

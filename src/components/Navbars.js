@@ -10,11 +10,13 @@ import {BsFillCupHotFill} from "react-icons/bs";
 import {BiLogOut} from "react-icons/bi";
 import {LuMessageSquareText} from "react-icons/lu";
 import {FaCartShopping} from "react-icons/fa6";
+import {useCart} from "../context/CartContext";
 
 function Navbars() {
     const [active, setActive] = useState(false);
     const [showPopup, setShowPopup] = useState(false); // État pour gérer l'affichage du popup
     const { isAuthenticated, logout } = useContext(AuthContext);
+    const { countArticle } = useCart();
 
     const handleLogout = () => {
         logout();
@@ -48,9 +50,10 @@ function Navbars() {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/cart"} onClick={() => setActive(false)}>
+                            <Link to={"/card"} onClick={() => setActive(false)}>
                                 <FaCartShopping/>
                                 <p>Panier</p>
+                                <span className={"quantity"}>{countArticle()}</span>
                             </Link>
                         </li>
                     </ul>

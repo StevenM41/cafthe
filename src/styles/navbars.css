@@ -121,6 +121,7 @@ nav .burger svg {
     display: flex;
     align-items: center;
     padding-left: 30px;
+    position: relative;
 }
 
 .slider label ul li a svg {
@@ -144,6 +145,25 @@ nav .burger svg {
     display: flex;
     align-items: center;
     padding-left: 30px;
+}
+
+.slider label ul li a .quantity{
+    width: 20px;
+    height: 20px;
+    background: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--bg-color);
+    border-radius: 80px;
+    position: absolute;
+    color: black;
+    transform: translate(25px, -15px);
+    text-decoration: none;
+}
+
+.slider.active label ul li a .quantity{
+
 }
 
 .slider.active label ul li a p {

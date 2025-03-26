@@ -125,3 +125,11 @@
     margin: 0;
     color: #333;
 }
+
+.poids-ou-boite-container {
+    margin-top: 20px;
+}
+.poids-ou-boite-select {
+    padding: 5px;
+    font-size: 16px;
+}

@@ -1,0 +1,584 @@
+.panier-container {
+    position: relative;
+    max-width: 900px; /* Limiter la largeur du conteneur pour éviter qu'il s'étale trop */
+    margin: 40px auto; /* Centrer verticalement et horizontalement */
+    margin-left: calc(140px + auto);
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Titre principal */
+.panier-container h2 {
+    font-size: 26px;
+    color: #222;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Liste des articles */
+.article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Article individuel */
+.article-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.article-item:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+/* Titre et contenu des articles */
+.article-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.article-item p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Prix unitaire et total TTC */
+.price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.article-total {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+.article-total span {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Catégories */
+.category {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Avertissement pour le stock */
+.stock-warning {
+    font-size: 14px;
+    color: #d9534f;
+    font-weight: bold;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.actions button {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    font-weight: bold;
+}
+
+.actions button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.actions button:hover:not(:disabled) {
+    background-color: #388e3c;
+    transform: scale(1.1);
+}
+
+.actions p {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #222;
+}
+
+/* Conteneur pour le total général */
+.total-container {
+    margin-top: 30px;
+    text-align: right;
+    font-weight: bold;
+    color: #222;
+    padding: 20px 0;
+    border-top: 2px solid #ddd;
+    font-size: 20px;
+}
+
+.total-container span {
+    font-size: 14px;
+    color: #888;
+}
+
+/* Boutons : vider et valider */
+.panier-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.panier-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#clear-cart {
+    background-color: #f44336;
+    color: white;
+}
+
+#clear-cart:hover {
+    background-color: #d63c2e;
+    transform: scale(1.05);
+}
+
+#validate-cart {
+    background-color: #2196F3;
+    color: white;
+}
+
+#validate-cart:hover {
+    background-color: #1976D2;
+    transform: scale(1.05);
+}
+
+/* Message panier vide */
+.empty-message {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    padding: 30px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-top: 20px;
+}
+
+.empty-message a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2196F3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.empty-message a:hover {
+    color: #1e88e5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .panier-container {
+        width: 100%; /* Lorsqu'on est en mobile, utiliser toute la largeur */
+        margin: 20px auto; /* Centrer */
+        padding: 15px;
+    }
+
+    .article-item {
+        padding: 15px;
+    }
+
+    .actions {
+        gap: 10px;
+    }
+
+    .actions button {
+        padding: 8px 10px;
+        font-size: 14px;/* Conteneur principal du panier */
+        .panier-container {
+            position: relative;
+            width: calc(100% - 100px); /* Prend en compte une navbar à gauche de 100px */
+            margin: 30px 0 30px 100px; /* Décale le conteneur pour éviter la navbar */
+            padding: 25px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Utile pour les animations */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Titre principal */
+        .panier-container h2 {
+            font-size: 28px;
+            color: #222;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Liste des articles */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Article individuel */
+        .article-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 20px;
+            border: 1px solid #e4e4e4;
+            border-radius: 8px;
+            background-color: #fff;
+            animation: fadeIn 0.4s ease-out;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        .article-item:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+        }
+
+        /* Animation pour les articles */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Suppression d'un article avec animation */
+        .article-item.removing {
+            animation: fadeOut 0.3s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.85);
+                height: 0;
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        /* Titre et contenu des articles */
+        .article-item h3 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eaeaea;
+            text-transform: uppercase;
+        }
+
+        .article-item p {
+            font-size: 14px;
+            font-weight: 400;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Prix unitaire et total TTC */
+        .price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .article-total {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .article-total span {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Catégories */
+        .category {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Avertissement pour le stock */
+        .stock-warning {
+            font-size: 14px;
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .actions button {
+            padding: 10px 14px;
+            font-size: 14px;
+            border: none;
+            border-radius: 6px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.3s ease;
+            font-weight: bold;
+        }
+
+        /* Désactivation des boutons */
+        .actions button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Animation hover des boutons */
+        .actions button:hover:not(:disabled) {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Conteneur pour le total général */
+        .total-container {
+            margin-top: 30px;
+            text-align: right;
+            font-weight: bold;
+            color: #222;
+            padding: 20px 0;
+            border-top: 2px solid #ddd;
+            font-size: 20px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        /* Animation pour le total */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Boutons globaux */
+        .panier-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .panier-actions button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #clear-cart {
+            background-color: #f44336;
+            color: white;
+            animation: bounceIn 0.5s ease-in-out;
+        }
+
+        #clear-cart:hover {
+            background-color: #d32f2f;
+            transform: scale(1.1);
+        }
+
+        #validate-cart {
+            background-color: #007bff;
+            color: white;
+            animation: bounceIn 0.5s ease-in-out;
+        }
+
+        #validate-cart:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Animation pour les boutons globaux */
+        @keyframes bounceIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Message pour panier vide */
+        .empty-message {
+            text-align: center;
+            font-size: 18px;
+            color: #777;
+            padding: 30px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .empty-message a {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .empty-message a:hover {
+            color: #0056b3;
+        }
+    }
+
+    .panier-actions button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .total-container {
+        font-size: 18px;
+    }
+}
+
+
+.panier-actions button {
+    font-size: 12px;
+    padding: 8px;
+}
+
+.total-container {
+    font-size: 14px;
+    text-align: center; /* Texte centré */
+}
+
+/* 375px - Téléphones classiques (iPhone X, XS) */
+@media (max-width: 375px) {
+    .panier-container {
+        margin: 10px 5px; /* Réduction encore plus forte */
+        padding: 12px;
+    }
+
+    .panier-container h2 {
+        font-size: 20px;
+    }
+
+    .article-item {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .actions button {
+        font-size: 10px;
+        padding: 5px 7px;
+    }
+
+    .panier-actions button {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .total-container {
+        font-size: 13px;
+    }
+}
+
+/* 320px - Très petit écran (iPhone SE, téléphones anciens) */
+@media (max-width: 320px) {
+    .panier-container {
+        margin: 8px 3px; /* Très petites marges */
+        padding: 10px;
+    }
+
+    .panier-container h2 {
+        font-size: 18px;
+    }
+
+    .article-item {
+        padding: 8px;
+        gap: 5px;
+    }
+
+    .actions button {
+        font-size: 9px;
+        padding: 5px;
+    }
+
+    .panier-actions button {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .total-container {
+        font-size: 12px;
+    }
+}

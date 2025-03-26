@@ -5,8 +5,11 @@ import Alert from "./Alert";
 import { FaCartShopping } from "react-icons/fa6";
 import axios from "axios";
 import '../styles/CardArticle.css'
+import { useCart } from "../context/CartContext";
 
 function CardArticle({ p }) {
+    const { addToCard } = useCart();
+
     const navigate = useNavigate();
     const [promo, setPromo] = useState([]);
 
@@ -18,10 +21,6 @@ function CardArticle({ p }) {
 
     function createAchat(id) {
         navigate(`/card?action=achat&article_id=${id}`);
-    }
-
-    function addToCart(id) {
-        navigate(`/shop?action=add&article_id=${id}`);
     }
 
     function reducePrice(price, reduce) {
@@ -46,6 +45,10 @@ function CardArticle({ p }) {
         const endDate = new Date(promotion.promotion_end).getTime();
         const currentDate = Date.now();
         return currentDate >= startDate && currentDate <= endDate;
+    }
+
+    function initToCard(article_id) {
+        addToCard(article_id);
     }
 
     return (
@@ -83,7 +86,7 @@ function CardArticle({ p }) {
                                     </button>
                                 </div>
                             )}
-                            <button className="cart-button" onClick={() => addToCart(article.article_id)} disabled={article.article_stock === 0}>
+                            <button className="cart-button" onClick={() => { initToCard(article.article_id) }} disabled={article.article_stock === 0}>
                                 <FaCartShopping />
                             </button>
                         </div>
