@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import {AuthContext} from "../context/AuthContext";
-import "../styles/navbars.css"
+import "../styles/components/navbars.css"
 import {GiHamburgerMenu} from "react-icons/gi";
 import {GrClose} from "react-icons/gr";
 import {Link} from "react-router-dom";
@@ -44,12 +44,6 @@ function Navbars() {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/forum"} onClick={() => setActive(false)}>
-                                <LuMessageSquareText/>
-                                <p>Forum</p>
-                            </Link>
-                        </li>
-                        <li>
                             <Link to={"/card"} onClick={() => setActive(false)}>
                                 <FaCartShopping/>
                                 <p>Panier</p>
@@ -58,6 +52,15 @@ function Navbars() {
                         </li>
                     </ul>
                     <span className={"separator"}></span>
+                    <ul>
+                        <li>
+                            <Link to={"/forum"} onClick={() => setActive(false)}>
+                                <LuMessageSquareText/>
+                                <p>Forum</p>
+                            </Link>
+                        </li>
+                    </ul>
+
                     {isAuthenticated && <span className={"separator last"}></span>}
                     <ul className={"footer"}>
                         {isAuthenticated && (

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import '../styles/Tags.css'
+import '../styles/components/Tags.css'
 import {IoMdPricetag} from "react-icons/io";
 
 function Tags({ id }) {
     const [tags, setTags] = useState([]);
-
+    
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/api/article/tags/${id}`)
             .then((tag) => {setTags(tag.data)})

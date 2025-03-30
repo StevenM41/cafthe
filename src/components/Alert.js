@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/Alert.css'
+import '../styles/components/Alert.css'
 import {LuBadgePercent} from "react-icons/lu";
 import {IoIosWarning} from "react-icons/io";
 import {AiOutlineStop} from "react-icons/ai";

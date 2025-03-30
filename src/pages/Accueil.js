@@ -5,32 +5,7 @@ import "../styles/Accueil.css";
 
 function Accueil() {
     const navigate = useNavigate();
-    const [promo, setPromo] = useState([]);
-    const [tagsMap, setTagsMap] = useState({});
     const [nav, setNav] = useState("");
-
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`)
-            .then((r) => setPromo(r.data))
-            .catch((err) => console.error(err));
-    }, []);
-
-    useEffect(() => {
-        const fetchTags = async () => {
-            const tagsMap = {};
-            for (const article of promo) {
-                try {
-                    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/article/tags/${article.article_id}`);
-                    tagsMap[article.article_id] = response.data;
-                } catch (error) {
-                    console.error("Erreur lors de la récupération des tags :", error);
-                }
-            }
-            setTagsMap(tagsMap);
-        };
-
-        void fetchTags();
-    }, [promo]);
 
     useEffect(() => {
         if(nav != null) {

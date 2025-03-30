@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Forum(props) {
+function Forum() {
     return (
         <div></div>
     );

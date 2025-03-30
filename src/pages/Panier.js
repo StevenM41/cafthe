@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import axios from "axios";
 import "../styles/Panier.css";
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 function Panier() {
     const { cartItems, clearCard, addQuantity, removeArticle, removeQuantity } = useCart();
     const [articles, setArticles] = useState([]);
     const [removingArticles, setRemovingArticles] = useState([]); // Liste des articles en train d'être supprimés
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const articleName = searchParams.get("") || "";
+
+    console.log(searchParams);
 
     // Récupération des articles en fonction des IDs du panier
     useEffect(() => {
