@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import '../styles/components/detailsProduits.css';
+import '../styles/detailsProduits.css';
 
 export const DetailProduits = ({ detailProduits, setShowModal }) => {
   const [poids, setPoids] = useState([]);

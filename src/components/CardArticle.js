@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import { FaCartShopping } from "react-icons/fa6";
 import axios from "axios";
-import '../styles/components/CardArticle.css'
+import '../styles/CardArticle.css'
 import { useCart } from "../context/CartContext";
 import { DetailProduits } from "./DetailProduits";
 

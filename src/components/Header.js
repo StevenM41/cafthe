@@ -3,7 +3,7 @@ import {AuthContext} from "../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
 import {FaSearch, FaUser} from "react-icons/fa";
 import {BiSolidSend} from "react-icons/bi";
-import '../styles/components/Header.css'
+import '../styles/Header.css'
 
 function Profile({ user }) {
     const navigate = useNavigate();

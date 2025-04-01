@@ -1,0 +1,180 @@
+menu {
+    height: 100px;
+    background: var(--bg-color);
+    width: 100%;
+    cursor: default;
+}
+
+menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+menu .logo_title {
+    display: flex;
+    width: auto;
+    height: 100px;
+    transform: translateX(100px);
+    gap: 20px;
+}
+
+menu .logo_title h1 {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 7px;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+    color: var(--text-color);
+}
+
+menu .logo_title img {
+    width: auto;
+    margin: 5px;
+}
+
+menu .searchbar {
+    display: flex;
+    width: 800px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+menu .searchbar span {
+    display: flex;
+    background: var(--text-color);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    transform: translateX(30px);
+    justify-content: center;
+    align-items: center;
+}
+
+menu .searchbar span .search-logo {
+    font-size: 26px;
+}
+
+menu .searchbar input {
+    width: 500px;
+    height: 50px;
+    border: 1px solid var(--border);
+    background: var(--text-color);
+    border-radius: 0 25px 25px 0;
+    text-indent: 34px;
+    font-size: 18px;
+    color: var(--border);
+    outline: none;
+}
+
+menu .searchbar input:focus::placeholder {
+    color: var(--text-color);
+}
+
+menu .searchbar input::placeholder {
+    color: var(--border);
+}
+
+menu .searchbar .send-logo {
+    font-size: 30px;
+    transform: translateX(-50px);
+}
+
+menu .searchbar .send-logo:hover {
+    cursor: pointer;
+}
+
+menu ul .login {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+menu ul .login .cart-connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+menu ul .login a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 24px;
+    margin: 8px;
+}
+
+menu ul .login .separator {
+    display: inline-block;
+    width: 220px;
+    height: 4px;
+    background-color: var(--text-color);
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+
+/*
+        <div className={"cart-profile client"}>
+            <Profile user={user}/>
+            <p>{user.nom}</p>
+            <span className={"separator"}></span>
+            <p>{user.prenom}</p>
+        </div>
+
+            if(user.profile_img) return (<img src={'/profile-'+ user.id + ".png"} alt={"Profile avatars"} />);
+            else return (<span className={"img_profile"}><FaUser /></span>);
+*/
+
+menu ul .cart-profile {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+menu ul .cart-profile .img_profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--text-color);
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+menu ul .cart-profile .img_profile svg {
+    font-size: 28px;
+}
+
+menu ul .cart-profile .info {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+menu ul .cart-profile .info p {
+    margin: 4px;
+    transform: translateX(-6px);
+    font-size: 26px;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+menu ul .cart-profile.client .separator {
+    width: 150px;
+}
+
+menu ul .cart-profile.vendeur .separator, menu ul .cart-profile.admin .separator {
+    width: 210px;
+}

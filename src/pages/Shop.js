@@ -30,10 +30,9 @@ function Shop() {
     console.log(filters);
 
     useEffect(() => {
-        // Construire un nouvel objet filtre basé sur l'état actuel
         setFilters({
             search: articleName,
-            categorie_id: categorieID || "", // "" si aucune catégorie sélectionnée
+            categorie_id: categorieID || "",
             price_min: value[0],
             price_max: value[1],
         });
@@ -53,15 +52,12 @@ function Shop() {
                     ? `${process.env.REACT_APP_API_URL}/api/filtre`
                     : `${process.env.REACT_APP_API_URL}/api/article`;
 
-                // Effectue la requête avec les filtres
                 const result = await axios.get(url, {
                     params: filters
                 });
 
-                // Mise à jour des articles
                 setArticle(result.data);
 
-                // Récupère les tags si disponible dans l'API
                 const tagsResult = await axios.get(`${process.env.REACT_APP_API_URL}/api/tags`);
                 setTags(tagsResult.data);
 

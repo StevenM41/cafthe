@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 
 import {AuthContext} from "../context/AuthContext";
-import "../styles/components/navbars.css"
+import "../styles/navbars.css"
 import {GiHamburgerMenu} from "react-icons/gi";
 import {GrClose} from "react-icons/gr";
 import {Link} from "react-router-dom";

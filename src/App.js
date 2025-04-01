@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import "./styles/reset.css"
 
 import {AuthProvider} from "./context/AuthContext";
@@ -12,22 +12,25 @@ import Shop from "./pages/Shop";
 import Forum from "./pages/Forum";
 import Panier from "./pages/Panier";
 import Login from "./pages/Login";
+import Account from "./pages/Account";
 
 function App() {
     return (
         <AuthProvider>
             <CartProvider>
-                <BrowserRouter>
+                <HashRouter>
                     <Routes>
                         <Route path={"/"} element={<Layout />}>
                             <Route index element={<Accueil />} />
                             <Route path={"shop"} element={<Shop />}/>
                             <Route path={"forum"} element={<Forum />}/>
                             <Route path={"card"} element={<Panier />}/>
+                            <Route path={"account"} element={<Account />} />
                         </Route>
                         <Route path={"/login"} element={<Login />} />
+                        <Route path={"/register"} element={<Register />} />
                     </Routes>
-                </BrowserRouter>
+                </HashRouter>
             </CartProvider>
         </AuthProvider>
     );

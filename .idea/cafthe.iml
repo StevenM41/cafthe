@@ -10,5 +10,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="index-DTfie-aa" level="application" />
+    <orderEntry type="library" name="client-ChDcy-h8" level="application" />
+    <orderEntry type="library" name="inter" level="application" />
   </component>
 </module>

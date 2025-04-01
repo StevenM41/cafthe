@@ -1,0 +1,135 @@
+/* Overlay derrière la popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+
+/* Container principal de la popup */
+.details-produits-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    z-index: 1000;
+    overflow: hidden;
+    animation: slideIn 0.3s ease-in-out;
+    font-family: 'Roboto', sans-serif;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -70%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.details-produits {
+    padding: 20px;
+    color: #333;
+}
+
+.details-produits h3 {
+    font-size: 24px;
+    color: #111;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.details-produits p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Section pour les poids */
+.poids-section, .boite-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.poids-section h4, .boite-section h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.poids-section ul, .boite-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.poids-section li, .boite-section li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Boutons d'action */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #eee;
+}
+
+.action-buttons button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+.action-buttons button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.action-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .details-produits-container {
+        width: 95%;
+        max-width: 90%;
+    }
+
+    .details-produits h3 {
+        font-size: 20px;
+    }
+
+    .action-buttons button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .poids-section li, .boite-section li {
+        font-size: 14px;
+    }
+}

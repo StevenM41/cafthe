@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import '../styles/components/Tags.css'
+import '../styles/Tags.css'
 import {IoMdPricetag} from "react-icons/io";
 
 function Tags({ id }) {
