@@ -10,13 +10,21 @@ function Alert({ id }) {
     const [promo, setPromo] = useState([]);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/article/${id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/article/${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
             .then((result) => {setArticle(result.data)})
             .catch((err) => console.error("Erreur lors de la récupération des Articles (Alert)", err));
     }, [id]);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
             .then((result) => setPromo(result.data))
             .catch((err) => console.error("Erreur lors de la récupération des articles en promotion - (CardArticle)", err));
     }, []);

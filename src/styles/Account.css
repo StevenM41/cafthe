@@ -1,0 +1,51 @@
+/* Account Page Styles */
+.account-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.account-nav {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+.account-nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.account-nav li {
+    margin-right: 2rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.account-nav li.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+}
+
+.account-nav li:hover {
+    color: #007bff;
+}
+
+.account-main {
+    width: 100%;
+    max-width: 800px;
+}
+
+.account-main > div {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

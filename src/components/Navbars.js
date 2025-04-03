@@ -24,7 +24,7 @@ function Navbars() {
     };
 
     return (
-        <nav>
+        <nav className={'nav'}>
             <div className={"burger"} onClick={() => setActive(!active)}>
                 {active ? <GrClose /> : <GiHamburgerMenu />}
             </div>
@@ -66,7 +66,7 @@ function Navbars() {
                         {isAuthenticated && (
                             <>
                                 <li>
-                                    <Link to={"/account/settings"}>
+                                    <Link to={"/account/"}>
                                         <IoSettings/>
                                         <p>Paramètre</p>
                                     </Link>

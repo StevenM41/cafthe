@@ -53,12 +53,21 @@ function Shop() {
                     : `${process.env.REACT_APP_API_URL}/api/article`;
 
                 const result = await axios.get(url, {
-                    params: filters
+                    params: filters,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
                 });
 
                 setArticle(result.data);
 
-                const tagsResult = await axios.get(`${process.env.REACT_APP_API_URL}/api/tags`);
+                const tagsResult = await axios.get(`${process.env.REACT_APP_API_URL}/api/tags`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
                 setTags(tagsResult.data);
 
             } catch (err) {

@@ -16,7 +16,11 @@ function CardArticle({ p }) {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/article/promotions`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
             .then((result) => setPromo(result.data))
             .catch((err) => console.error("Erreur lors de la récupération des articles en promotion - (CardArticle)", err));
     }, []);
@@ -55,7 +59,11 @@ function CardArticle({ p }) {
     }
 
     function getDetailProduits(article_id) {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/article/${article_id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/article/${article_id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
             .then((response) => {
                 console.log(response.data); // Log the details for debugging
                 setDetailProduits(response.data);

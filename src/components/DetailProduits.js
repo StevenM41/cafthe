@@ -9,13 +9,21 @@ export const DetailProduits = ({ detailProduits, setShowModal }) => {
   console.log(detailProduits);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/article/poids/${detailProduits.article_id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/article/poids/${detailProduits.article_id}`, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
         .then((response) => {
           setPoids(response.data);
         })
         .catch((err) => console.error(err));
 
-    axios.get(`${process.env.REACT_APP_API_URL}/api/article/boite/${detailProduits.article_id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/article/boite/${detailProduits.article_id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
         .then((response) => {
           setBoite(response.data);
         })

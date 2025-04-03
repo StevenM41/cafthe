@@ -20,7 +20,11 @@ function Panier() {
         const fetchArticles = async () => {
             try {
                 const articlePromises = cartItems.map((item) =>
-                    axios.get(`${process.env.REACT_APP_API_URL}/api/article/${item.articleID}`)
+                    axios.get(`${process.env.REACT_APP_API_URL}/api/article/${item.articleID}`, {
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
                 );
 
                 const results = await Promise.all(articlePromises);

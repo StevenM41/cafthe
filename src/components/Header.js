@@ -8,7 +8,7 @@ import '../styles/Header.css'
 function Profile({ user }) {
     const navigate = useNavigate();
     if(user.profile_img) return (<img src={'/profile-'+ user.id + ".png"} alt={"Profile avatars"} />);
-    else return (<span className={"img_profile"} onClick={() => navigate(`/account/settings/`)}><FaUser /></span>);
+    else return (<span className={"img_profile"} onClick={() => navigate(`/account/`)}><FaUser /></span>);
 }
 
 function Header() {

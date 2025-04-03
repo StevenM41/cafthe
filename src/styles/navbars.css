@@ -52,7 +52,7 @@
     color: white;
 }
 
-nav {
+.nav {
     position: fixed;
     width: 100px;
     height: 100%;
@@ -61,13 +61,13 @@ nav {
     z-index: 800;
 }
 
-nav .burger {
+.nav .burger {
     display: flex;
     justify-content: center;
     margin: 25px;
 }
 
-nav .burger svg {
+.nav .burger svg {
     font-size: 50px;
     color: var(--text-color);
 }
