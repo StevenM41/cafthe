@@ -24,12 +24,12 @@ function Profile () {
     }, [user.id, token]);
 
     useEffect(() => {
-        if(!isFinish) return;
-
-        if (!userInfo) {
-            if (user.id !== userInfo.user_id && user.nom !== userInfo.user_name && user.prenom !== userInfo.user_prenom) {
-                logout();
-                navigate('/');
+        if(isFinish) {
+            if (!userInfo) {
+                if (user.id !== userInfo.user_id && user.nom !== userInfo.user_name && user.prenom !== userInfo.user_prenom) {
+                    logout();
+                    navigate('/');
+                }
             }
         }
     }, [isFinish, user, userInfo, logout, navigate]);
@@ -63,32 +63,32 @@ function Profile () {
             <br />
             <table className="profile-table">
                 <tbody>
-                <tr>
-                    <th className="profile-label">Nom:</th>
-                    <td className="profile-value">{userInfo.user_name}</td>
-                </tr>
-                <tr>
-                    <th className="profile-label">Prenom:</th>
-                    <td className="profile-value">{userInfo.user_prenom}</td>
-                </tr>
-                <tr>
-                    <th className="profile-label">E-mail:</th>
-                    <td className="profile-value">
-                        {isEmailHidden ? maskEmail(userInfo.user_email) : userInfo.user_email}
-                        <button className="toggle-button" onClick={toggleEmailVisibility}>
-                            {isEmailHidden ?  <BsFillEyeFill /> : <BsFillEyeSlashFill />}
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th className="profile-label">Téléphone:</th>
-                    <td className="profile-value">
-                        {isPhoneHidden ? maskPhone(userInfo.user_telephone) : userInfo.user_telephone}
-                        <button className="toggle-button" onClick={togglePhoneVisibility}>
-                            {isPhoneHidden ?  <BsFillEyeFill /> : <BsFillEyeSlashFill />}
-                        </button>
-                    </td>
-                </tr>
+                    <tr>
+                        <th className="profile-label">Nom:</th>
+                        <td className="profile-value">{userInfo.user_name}</td>
+                    </tr>
+                    <tr>
+                        <th className="profile-label">Prenom:</th>
+                        <td className="profile-value">{userInfo.user_prenom}</td>
+                    </tr>
+                    <tr>
+                        <th className="profile-label">E-mail:</th>
+                        <td className="profile-value">
+                            {isEmailHidden ? maskEmail(userInfo.user_email) : userInfo.user_email}
+                            <button className="toggle-button" onClick={toggleEmailVisibility}>
+                                {isEmailHidden ?  <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th className="profile-label">Téléphone:</th>
+                        <td className="profile-value">
+                            {isPhoneHidden ? maskPhone(userInfo.user_telephone) : userInfo.user_telephone}
+                            <button className="toggle-button" onClick={togglePhoneVisibility}>
+                                {isPhoneHidden ?  <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Footer.css'
+import {Link} from "react-router-dom";
 
 function Footer() {
     return (
@@ -14,7 +15,7 @@ function Footer() {
 
                     {/* Liens sociaux alignés à droite */}
                     <div className="footer-links">
-                        <a href="#" className="footer-link">
+                        <Link to="#" className="footer-link">
                             <svg
                                 className="icon"
                                 fill="currentColor"
@@ -28,8 +29,8 @@ function Footer() {
                                 ></path>
                             </svg>
                             Facebook
-                        </a>
-                        <a href="#" className="footer-link">
+                        </Link>
+                        <Link to="#" className="footer-link">
                             <svg
                                 className="icon"
                                 fill="currentColor"
@@ -43,7 +44,7 @@ function Footer() {
                                 ></path>
                             </svg>
                             Instagram
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </footer>

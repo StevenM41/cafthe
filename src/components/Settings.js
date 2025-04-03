@@ -72,10 +72,6 @@ function Settings() {
     }, [address]);
 
     return (
-        <div>En développement</div>
-    )
-
-    return (
         <div className="settings-account">
             <h2>Account Settings</h2>
             <div>
