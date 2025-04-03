@@ -3,6 +3,7 @@ import '../styles/Account.css'
 import Profile from "../components/Profile";
 import {AuthContext} from "../context/AuthContext";
 import {useNavigate} from "react-router-dom";
+import Settings from "../components/Settings";
 
 function Account() {
     const [activeSection, setActiveSection] = useState('profile');
@@ -48,15 +49,8 @@ function Account() {
 
 const Orders = () => (
     <div>
-        <h2>Orders</h2>
-        <p>View your order history here.</p>
-    </div>
-);
-
-const Settings = () => (
-    <div>
-        <h2>Settings</h2>
-        <p>Manage your account settings here.</p>
+        <h2>Commandes</h2>
+        <p>En développement</p>
     </div>
 );
 

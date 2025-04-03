@@ -9,11 +9,14 @@
     z-index: 999;
 }
 
-.popus.deconnexion {
+.popup {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+.popup.deconnexion {
+    position: fixed;
+    top: calc(50% - 77px);
+    left: calc(calc(1920px / 2) - 170px) ;
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -23,17 +26,17 @@
     text-align: center;
 }
 
-.popus.deconnexion h2 {
+.popup.deconnexion h2 {
     margin-bottom: 10px;
     font-size: 20px;
 }
 
-.popus.deconnexion p {
+.popup.deconnexion p {
     margin-bottom: 20px;
     font-size: 16px;
 }
 
-.popus.deconnexion button {
+.popup.deconnexion button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -42,12 +45,12 @@
     margin: 5px;
 }
 
-.popus.deconnexion .success {
+.popup.deconnexion .success {
     background-color: #28a745;
     color: white;
 }
 
-.popus.deconnexion .cancel {
+.popup.deconnexion .cancel {
     background-color: #dc3545;
     color: white;
 }

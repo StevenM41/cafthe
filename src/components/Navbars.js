@@ -85,7 +85,7 @@ function Navbars() {
             {showPopup && (
                 <>
                     <span className="bg-blur" onClick={() => setShowPopup(false)}></span>
-                    <div className="popus deconnexion">
+                    <div className="popup deconnexion">
                         <h2>Déconnexion</h2>
                         <p>Voulez-vous vraiment vous déconnecter ?</p>
                         <button className="success" onClick={handleLogout}>Déconnexion</button>
