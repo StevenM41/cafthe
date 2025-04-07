@@ -1,0 +1,46 @@
+.cgv-page {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cgv-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+.cgv-updated {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cgv-section {
+    margin-bottom: 20px;
+}
+
+.cgv-section-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.cgv-section-content {
+    font-size: 1em;
+    color: #555;
+    padding-left: 10px;
+}
+
+.cgv-section-content p {
+    margin: 5px 0;
+}

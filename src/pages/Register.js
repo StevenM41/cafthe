@@ -14,43 +14,89 @@ function Register() {
     const [user_password, setPassword] = useState("")
     const [user_telephone, setPhone] = useState("")
 
-    const [errorMsg, setErrorMsg] = useState("")
+    const [errorMsg, setErrorMsg] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrorMsg("");
+        setErrorMsg([]); // Réinitialiser les messages d'erreur
+
+        const trimmedName = user_name.trim();
+        const trimmedPrenom = user_prenom.trim();
+        const trimmedEmail = user_email.trim();
+        const trimmedPhone = user_telephone.trim();
+        const password = user_password;
+
+        const newErrors = [];
+
+        if (!trimmedName || !trimmedPrenom) {
+            newErrors.push("\n- Le nom et le prénom ne peuvent pas être vides.");
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(trimmedEmail)) {
+            newErrors.push("\n- L'adresse e-mail n'est pas valide.");
+        }
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/;
+        if (!passwordRegex.test(password)) {
+            newErrors.push("\n- Le mot de passe doit contenir au moins 10 caractères, une majuscule, un chiffre et un caractère spécial.");
+        }
+
+        const phoneRegex = /^\d+$/;
+        if (!phoneRegex.test(trimmedPhone) || trimmedPhone.length < 10) {
+            newErrors.push("\n- Le numéro de téléphone doit contenir uniquement des chiffres et être valide.");
+        }
+
+        if (newErrors.length > 0) {
+            setErrorMsg(newErrors);
+            return;
+        }
 
         try {
-            const responce = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`,
-                {user_name: user_name, user_prenom: user_prenom, user_email: user_email, user_password: user_password, user_telephone: user_telephone}, {
+            const response = await axios.post(
+                `${process.env.REACT_APP_API_URL}/api/users/register`,
+                {
+                    user_name: trimmedName,
+                    user_prenom: trimmedPrenom,
+                    user_email: trimmedEmail,
+                    user_password: password,
+                    user_telephone: trimmedPhone
+                },
+                {
                     headers: {
                         "Content-Type": "application/json"
                     }
-                });
-            const {token, client} = responce.data;
+                }
+            );
+
+            const { token, client } = response.data;
             login(token, client);
 
-            navigate("/")
+            navigate("/");
         } catch (error) {
-            console.error("Erreur de lors de la connexion", error);
-            if(error.response.data.message) {
-                setErrorMsg(error.response.data.message);
+            console.error("Erreur lors de la connexion", error);
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorMsg([error.response.data.message]);
             } else {
-                setErrorMsg("Une erreur est survenue.")
+                setErrorMsg(["Une erreur est survenue."]);
             }
         }
-    }
+    };
 
     return (
         <div className={"login-page"}>
             <div className="left-page">
                 <img src='/cafthe.png' alt={"LOGO"} />
             </div>
-            <div className={"pupup-error"}>
-                {errorMsg && (
-                    <p className={"error-message"}>{errorMsg}</p>
-                )}
-            </div>
+            {errorMsg.length > 0 && (
+                <div className="popup-error">
+                    {errorMsg.map((error, index) => (
+                        <p key={index} className="error-message">
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            )}
             <div className="right-page">
                 <div className="container">
                     <h2>INSCRIPTION</h2>
@@ -80,12 +126,12 @@ function Register() {
                                 }}
                                 required
                             />
-                            <label>Votre adresse email <span className={'require'}>*</span></label>
+                            <label>Votre prenom <span className={'require'}>*</span></label>
                             <button type={"reset"}><img src='/button.png' alt={"Bouton reset"} onClick={() => { setPrenom('')}}/></button>
                         </div>
                         <div className={"middle-input"}>
                             <input
-                                type={"text"}
+                                type={"email"}
                                 className="input-middle"
                                 placeholder={"Saisir ici..."}
                                 value={user_email}
@@ -103,6 +149,7 @@ function Register() {
                                 className="input-middle"
                                 placeholder={"Saisir ici..."}
                                 value={user_password}
+                                min={10}
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                 }}

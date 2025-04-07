@@ -12,45 +12,24 @@ function Shop() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const articleName = searchParams.get("search") || "";
-
     const [tagActive, setTagActive] = useState([]);
-    const [value, setValue] = useState([0, 200]); // [Min, Max] prix
-    const [tag, setTag] = useState([]); // Liste des tags sélectionnés
-    const [tags, setTags] = useState([]); // Liste des tags sélectionnés
+    const [value, setValue] = useState([0, 200]);
+    const [tag, setTag] = useState([]);
+    const [tags, setTags] = useState([]);
     const [article, setArticle] = useState([]);
-    const [categorieID, setCategorieID] = useState(0); // Catégorie sélectionnée
-
-    const [filters, setFilters] = useState({
-        search: articleName,
-        categorie_id: categorieID,
-        price_min: value[0],
-        price_max: value[1]
-    });
-
-    console.log(filters);
+    const [categorieID, setCategorieID] = useState(0);
+    const [filters, setFilters] = useState({search: articleName, categorie_id: categorieID, price_min: value[0], price_max: value[1]});
 
     useEffect(() => {
-        setFilters({
-            search: articleName,
-            categorie_id: categorieID || "",
-            price_min: value[0],
-            price_max: value[1],
-        });
+        setFilters({search: articleName, categorie_id: categorieID || "", price_min: value[0], price_max: value[1],});
     }, [categorieID, articleName, tagActive, value]);
-
 
     useEffect(() => {
         const fetchFilteredData = async () => {
             try {
-                const isFilterActive =
-                    filters.categorie_id ||
-                    filters.search ||
-                    filters.price_min > 0 ||
-                    filters.price_max < 200
+                const isFilterActive = filters.categorie_id || filters.search || filters.price_min > 0 || filters.price_max < 200
 
-                const url = isFilterActive
-                    ? `${process.env.REACT_APP_API_URL}/api/filtre`
-                    : `${process.env.REACT_APP_API_URL}/api/article`;
+                const url = isFilterActive ? `${process.env.REACT_APP_API_URL}/api/filtre` : `${process.env.REACT_APP_API_URL}/api/article`;
 
                 const result = await axios.get(url, {
                     params: filters,
@@ -59,7 +38,6 @@ function Shop() {
                         'Accept': 'application/json'
                     }
                 });
-
                 setArticle(result.data);
 
                 const tagsResult = await axios.get(`${process.env.REACT_APP_API_URL}/api/tags`, {
@@ -79,7 +57,7 @@ function Shop() {
     }, [filters]);
 
     const handleCategorieChange = (id) => {
-        setCategorieID(prevID => prevID === id ? 0 : id); // Réinitialise si la même catégorie est cliquée
+        setCategorieID(prevID => prevID === id ? 0 : id);
     };
 
     const handleSliderChange = (newValue) => {

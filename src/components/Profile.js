@@ -12,6 +12,7 @@ function Profile () {
     const [isPhoneHidden, setIsPhoneHidden] = useState(true);
     const navigate = useNavigate();
     const [isFinish, setFinish] = useState(false);
+    const [loadingText, setLoadingText] = useState('Loading...');
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/api/users/${user.id}`, {
@@ -34,8 +35,23 @@ function Profile () {
         }
     }, [isFinish, user, userInfo, logout, navigate]);
 
+    useEffect(() => {
+        if (isFinish) {
+            const interval = setInterval(() => {
+                setLoadingText((prevText) => {
+                    if (prevText === 'Loading...') return 'Loading';
+                    if (prevText === 'Loading') return 'Loading.';
+                    if (prevText === 'Loading.') return 'Loading..';
+                    return 'Loading...';
+                });
+            }, 300);
+
+            return () => clearInterval(interval);
+        }
+    }, [isFinish]);
+
     if (!isFinish) {
-        return <div>Loading...</div>;
+        return <div>{loadingText}</div>;
     }
 
     const toggleEmailVisibility = () => {
@@ -44,7 +60,8 @@ function Profile () {
 
     const maskEmail = (email) => {
         const [local, domain] = email.split('@');
-        const maskedLocal = local.slice(0, 3) + '*'.repeat(local.length - 3);
+        const [firts] = local.split(".");
+        const maskedLocal = local.slice(0, firts.length + 1) + '*'.repeat(local.length - 3);
         return `${maskedLocal}@${domain}`;
     };
 

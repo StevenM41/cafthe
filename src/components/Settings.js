@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -7,6 +7,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import '../styles/Settings.css';
+import {AuthContext} from "../context/AuthContext";
 
 // Fix for Leaflet default icon path
 delete L.Icon.Default.prototype._getIconUrl;
@@ -16,45 +17,29 @@ L.Icon.Default.mergeOptions({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
 });
-
 function Settings() {
-    const [account, setAccount] = useState({ username: '', email: '' });
+    const [account, setAccount] = useState({ name: '', prenom: '', email: '', phone: '', password: '' });
     const [address, setAddress] = useState({ street: '', city: '', postalCode: '', country: '' });
-    const [position, setPosition] = useState([48.8566, 2.3522]); // Default position (Paris)
+    const [position, setPosition] = useState([48.8566, 2.3522]);
+    const [users, setUsers] = useState({});
+    const [securePassword, setSecurePassword] = useState(false);
 
-    const handleAccountChange = (e) => {
-        const { name, value } = e.target;
-        setAccount((prevAccount) => ({
-            ...prevAccount,
-            [name]: value,
-        }));
-    };
+    const { user, token } = useContext(AuthContext);
 
-    const handleAddressChange = (e) => {
-        const { name, value } = e.target;
-        setAddress((prevAddress) => ({
-            ...prevAddress,
-            [name]: value,
-        }));
-    };
+    // Fetch user data on component mount or when user ID changes
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/users/${user.id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(r => {
+                setUsers(r.data);
+            })
+            .catch(err => console.error(err));
+    }, [user.id, token]);
 
-    const handleSaveChanges = () => {
-        // Implement save changes logic here
-    };
-
-    const handleDeleteAccount = () => {
-        // Implement delete account logic here
-    };
-
-    const validatePostalCode = (postalCode) => {
-        const postalCodeRegex = /^[A-Za-z0-9]{5,}$/;
-        return postalCodeRegex.test(postalCode);
-    };
-
-    const handleMapClick = (e) => {
-        setPosition([e.latlng.lat, e.latlng.lng]);
-    };
-
+    // Update position based on address changes
     useEffect(() => {
         if (address.street && address.city && address.postalCode && address.country) {
             const fullAddress = `${address.street}, ${address.city}, ${address.postalCode}, ${address.country}`;
@@ -71,23 +56,127 @@ function Settings() {
         }
     }, [address]);
 
+    // Handlers
+    const handleAddressChange = (e) => {
+        const { name, value } = e.target;
+        setAddress(prevAddress => ({
+            ...prevAddress,
+            [name]: value,
+        }));
+    };
+
+    const handleAccountChange = (e) => {
+        const { name, value } = e.target;
+        setAccount(prevAccount => ({
+            ...prevAccount,
+            [name]: value,
+        }));
+    };
+
+    const handleMapClick = (e) => {
+        setPosition([e.latlng.lat, e.latlng.lng]);
+    };
+
+    const handleSaveChanges = () => {
+        axios.post(`${process.env.REACT_APP_API_URL}/api/users/edit`, {
+            user_id: users.user_id,
+            user_name: account.name || users.user_name,
+            user_prenom: account.prenom || users.user_prenom,
+            user_email: account.email || users.user_email,
+            user_password: account.password || users.user_password,
+            user_telephone: account.phone || users.user_telephone
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).catch(err => console.error(err));
+
+        const userData = {
+            "id": users.user_id,
+            "nom": account.name || users.user_name,
+            "prenom": account.prenom || users.user_prenom
+        }
+
+        localStorage.setItem("user", JSON.stringify(userData));
+    };
+
+    const handleConfirmChanges = () => {
+        handleSaveChanges();
+        setSecurePassword(false);
+        window.location.reload();
+
+
+
+    };
+
+    const handleDeleteAccount = () => {
+    };
+
+    const validatePostalCode = (postalCode) => {
+        const postalCodeRegex = /^[0-9]{5,}$/;
+        return postalCodeRegex.test(postalCode);
+    };
+
     return (
         <div className="settings-account">
-            <h2>Account Settings</h2>
+            {securePassword && (
+                <>
+                    <div className={'popup-overlay'}></div>
+                    <div className={'popup-container'}>
+                        <h3>Confirmer les changements ?</h3>
+                        <label>
+                            Mot de passe :
+                            <input type="password" name="password" onChange={handleAccountChange} required />
+                        </label>
+                        <button onClick={() => handleConfirmChanges()}>Confirmé</button>
+                    </div>
+                </>
+            )}
+            <h2>Paramètre du compte</h2>
             <div>
-                <h3>Modify Account</h3>
+                <h3>Modifier le compte</h3>
                 <label>
-                    Nom d'utilisateur :
-                    <input type="text" name="username" value={account.username} onChange={handleAccountChange} />
+                    Votre Nom :
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder={users.user_name}
+                        onChange={handleAccountChange}
+                    />
                 </label>
                 <br />
                 <label>
-                    E-mail:
-                    <input type="email" name="email" value={account.email} onChange={handleAccountChange} />
+                    Votre prenom :
+                    <input
+                        type="text"
+                        name="prenom"
+                        placeholder={users.user_prenom}
+                        onChange={handleAccountChange}
+                    />
                 </label>
                 <br />
-                <button onClick={handleSaveChanges}>Save Changes</button>
-                <button onClick={handleDeleteAccount}>Delete Account</button>
+                <label>
+                    Votre E-mail:
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder={users.user_email}
+                        onChange={handleAccountChange}
+                    />
+                </label>
+                <br />
+                <label>
+                    Votre téléphone:
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder={users.user_telephone}
+                        onChange={handleAccountChange}
+                    />
+                </label>
+                <br />
+                <button onClick={() => setSecurePassword(true)}>Save Changes</button>
+                <button onClick={handleDeleteAccount} disabled >Delete Account</button>
             </div>
             <br />
             <div>
@@ -109,7 +198,7 @@ function Settings() {
                         name="postalCode"
                         value={address.postalCode}
                         onChange={handleAddressChange}
-                        pattern="[A-Za-z0-9]{5,}"
+                        pattern="[0-9]{5,}"
                         min={5}
                         max={5}
                         required

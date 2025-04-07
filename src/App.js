@@ -14,9 +14,7 @@ import Panier from "./pages/Panier";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
 import Register from "./pages/Register";
-import CGV from "./pages/CGV";
-import PolotiqueConfidentialite from "./pages/PolotiqueConfidentialite";
-import MentionLegale from "./pages/MentionLegale";
+import Legacy from "./pages/Legacy";
 
 function App() {
     return (
@@ -30,9 +28,7 @@ function App() {
                             <Route path={"forum"} element={<Forum />}/>
                             <Route path={"card"} element={<Panier />}/>
                             <Route path={"account"} element={<Account />} />
-                            <Route path={"legacy/cgv"} element={<CGV />} />
-                            <Route path={"legacy/politique-de-confidentialite"} element={<PolotiqueConfidentialite />} />
-                            <Route path={"legacy/mention-legale"} element={<MentionLegale />} />
+                            <Route path={"legacy"} element={<Legacy />} />
                         </Route>
                         <Route path={"/login"} element={<Login />} />
                         <Route path={"/register"} element={<Register />} />
